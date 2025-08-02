@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://favil3r5k7h7"]
+
+[ext_resource type="Script" path="res://Scripts/CameraScript.gd" id="1_wjg12"]
+
+[node name="CameraComponent" type="Node2D" node_paths=PackedStringArray("cam")]
+script = ExtResource("1_wjg12")
+cam = NodePath("Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true

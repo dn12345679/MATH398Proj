@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgdhlcn253ppt"]
+
+[ext_resource type="Script" path="res://Scripts/ParallaxBackgroundScript.gd" id="1_ngka7"]
+
+[node name="ParallaxComponent" type="Node2D" node_paths=PackedStringArray("c_layer", "p_bg")]
+script = ExtResource("1_ngka7")
+c_layer = NodePath("CanvasLayer")
+p_bg = NodePath("CanvasLayer/ParallaxBackground")
+scroll_offset = Vector2(0, 500)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]

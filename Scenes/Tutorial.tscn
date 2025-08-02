@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://brvgx4toir5sa"]
+
+[ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="1_lb7nh"]
+[ext_resource type="Script" path="res://Scripts/LevelHandlers/TutorialHandler.gd" id="1_xvxu3"]
+[ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="2_tx68x"]
+[ext_resource type="PackedScene" uid="uid://bgdhlcn253ppt" path="res://Components/ParallaxComponent.tscn" id="3_vabsx"]
+
+[node name="Tutorial" type="Node2D"]
+script = ExtResource("1_xvxu3")
+
+[node name="MascotComponent" parent="." node_paths=PackedStringArray("main") instance=ExtResource("1_lb7nh")]
+main = NodePath("..")
+
+[node name="CameraComponent" parent="." node_paths=PackedStringArray("node_follow") instance=ExtResource("2_tx68x")]
+node_follow = NodePath("../MascotComponent")
+zoom_amount = 2.0
+
+[node name="ParallaxComponent" parent="." instance=ExtResource("3_vabsx")]
+alpha_scale = 0.8
+scroll_offset = Vector2(0, 1000)
+scroll_speed = 80.0

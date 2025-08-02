@@ -1,0 +1,129 @@
+[gd_scene load_steps=14 format=3 uid="uid://buolqtcajlxo6"]
+
+[ext_resource type="Script" path="res://Scripts/MascotScript.gd" id="1_66qik"]
+[ext_resource type="Texture2D" uid="uid://bfs6q72tly6ea" path="res://Assets/Images/mascot.png" id="2_jipn7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt7iy"]
+atlas = ExtResource("2_jipn7")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwo5l"]
+atlas = ExtResource("2_jipn7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2y7bq"]
+atlas = ExtResource("2_jipn7")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm1cx"]
+atlas = ExtResource("2_jipn7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocnd2"]
+atlas = ExtResource("2_jipn7")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0m7q8"]
+atlas = ExtResource("2_jipn7")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecbo8"]
+atlas = ExtResource("2_jipn7")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fhnd"]
+atlas = ExtResource("2_jipn7")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqchd"]
+atlas = ExtResource("2_jipn7")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fy1eg"]
+atlas = ExtResource("2_jipn7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4hljp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt7iy")
+}],
+"loop": true,
+"name": &"Correct",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwo5l")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2y7bq")
+}],
+"loop": true,
+"name": &"Incorrect",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tm1cx")
+}],
+"loop": true,
+"name": &"Question",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocnd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0m7q8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecbo8")
+}],
+"loop": true,
+"name": &"Speaking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fhnd")
+}],
+"loop": true,
+"name": &"Thinking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqchd")
+}],
+"loop": true,
+"name": &"Time",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fy1eg")
+}],
+"loop": true,
+"name": &"Wave",
+"speed": 5.0
+}]
+
+[node name="MascotComponent" type="Node2D" node_paths=PackedStringArray("animator")]
+script = ExtResource("1_66qik")
+animator = NodePath("AnimationPlayer")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 3
+sprite_frames = SubResource("SpriteFrames_4hljp")
+animation = &"Idle"
+frame_progress = 0.902158
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
