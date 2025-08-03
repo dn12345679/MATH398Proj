@@ -1,5 +1,5 @@
 class_name AnimatedCharacterInterface
-extends Node
+extends Node2D
 
 # Inherited field
 
@@ -10,7 +10,8 @@ enum Event {
 	INCORRECT,
 	PAUSE,
 	SLOW,
-	TIME_LOW
+	TIME_LOW, 
+	SPEAKING
 }
 
 
@@ -51,6 +52,8 @@ func move_to(node: Node2D, pos: Vector2, speed: float) -> Vector2: # IMPLEMENTED
 	var pos_tween: Tween = get_tree().create_tween()
 	pos_tween.tween_property(node, "position", pos, speed) 
 	return old_pos # should be original position in case
+	
+	
 func face_direction(node: Node2D, direction: Vector2) -> void: # IMPLEMENTED
 	if sign(direction.x) == 1.0:
 		node.flip_h = false
@@ -85,10 +88,6 @@ func get_camera() -> Camera2D:
 	push_error("get_camera() must be implemented by subclass.")
 	return null
 
-func show(node: Node2D) -> void: # IMPLEMENTED
-	node.visible = true
-func hide(node: Node2D) -> void: # IMPLEMENTED
-	node.visible = false
 func wait(seconds: float) -> void: # IMPLEMENTED
 	await get_tree().create_timer(seconds).timeout
 func event_to_string(event: Event) -> String: # IMPLEMENTED

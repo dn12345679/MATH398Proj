@@ -7,6 +7,7 @@ signal text_finished
 @export_category("Dialogue Options")
 @export var text: String = ""
 @export var text_duration: float = 1.0
+@export var mood: String = "Idle" # implemented in classes
 @onready var animator: AnimationPlayer = $BubbleAnimation
 
 @export var text_node: Label
@@ -15,11 +16,12 @@ signal text_finished
 
 
 
-func setup(new_text: String, duration: float):
+func setup(new_text: String, duration: float, init_mood: String):
 	text = new_text
 	text_duration = duration
 	if text_node:
 		text_node.text = text
+	self.mood = init_mood
 
 func _ready():
 	self.connect("animation_finished", Callable(self, "_after_finish")) 
@@ -69,3 +71,6 @@ func remove_self() -> void:
 	await animator.animation_finished	
 	
 	queue_free()
+
+func _to_string() -> String:
+	return text

@@ -1,64 +1,72 @@
 class_name MascotComponent
 extends AnimatedCharacterInterface
 
-var dialogue_scene = preload("res://Components/DialogueComponent.tscn")
-
+signal speech_finished
 
 @export_category("Mascot Properties")
+@export var sprite: AnimatedSprite2D
 @export var animator: AnimationPlayer
 @export var dialogues: Array[DialogueComponent]
 @export var main: Handler # world map or node
 
-func dialogue_bank() -> Array[DialogueComponent]:
-	var bank: Array[DialogueComponent] = []
-	
-	var text_arr: Array = []
-	match main.speech_stage:
-		0:
-			text_arr = [ 
-				["Hello, welcome to the tutorial!", 1.0],
-				[" In this tutorial I will show you", 2.0], 
-				]
-	
-	# add all speech dialogues to bank
-	for i in text_arr:
-		var component: DialogueComponent = dialogue_scene.instantiate() as DialogueComponent
-		component.setup(i[0], i[1])
-		bank.append(component)
-	
-	return bank
+
 
 func _ready():
-	if main == null:
+	if main == null && get_parent() != null:
 		main = get_parent() # must be a node2D and have a handler script for dialogue
-	 
-	dialogues = dialogue_bank()
-	speak("", 0)
+	
+	self.connect("speech_finished", Callable(main, 'increment_stage'))
+	self.connect("speech_finished", Callable(self, 'get_bank'))
+	get_bank() # get the dialogues to start
+
+## very simple, gets the latest dialogue in the bank, then speaks
+func get_bank() -> void:
+	self.dialogues = main.dialogue_bank(self)
+	
+	# to prevent erroring, only speak if there is words to be said
+	if len(self.dialogues) > 0: 
+		speak("", 0)
 
 # Dialogue Functions
 
 ## Handles creating and initializing character speech bubbles, with speech_bank_idx
 	## as a fallback in case the dialogue is from the speech bank
 func speak(dialogue: String = "", speech_bank_idx: int = -1) -> void:
-	var sp_comp: DialogueComponent = dialogues[speech_bank_idx]
-	
-	if dialogue == "" || dialogue == null:
-		dialogue = sp_comp.get_text()
+	# prevent errors from finishing dialogue
+	if speech_bank_idx < len(dialogues):
+		var sp_comp: DialogueComponent = self.dialogues[speech_bank_idx]
 		
-	add_child(sp_comp) # auto text
-	await sp_comp.text_finished
+		if dialogue == "" || dialogue == null:
+			dialogue = sp_comp.get_text()
+		
+		react_to(Event.SPEAKING)
+		mood(sp_comp.mood)
+		
+		self.add_child.call_deferred(sp_comp) # auto text
+		
+		# hard-coded but this properly centers all text boxes
+		sp_comp.position.y -= 64
+		sp_comp.position.x -= 64
+		
+		await sp_comp.text_finished
 	
 	if (speech_bank_idx + 1 < len(dialogues)):
 		speak("", speech_bank_idx + 1)
-	
-@warning_ignore("unused_parameter")
+	else:
+		speech_finished.emit()
+
+
+
 func react_to(event: Event) -> void:
-	push_error("react_to() must be implemented by subclass.")
-	pass # usually will be a call to speak()
-@warning_ignore("unused_parameter")
-func _on_character_finished_speaking(character: AnimatedCharacterInterface) -> void:  # signal
-	push_error("_on_character_finished_speaking() must be implemented by subclass (signal).")
-	pass
+	match event:
+		Event.SPEAKING:
+			animator.play("Talking", -1, 2.0)
+
+## AnimatedSprite2D is the "mood" of the character
+func mood(char_mood: String) -> void:
+	sprite.play(char_mood)
+		
+	
 func cancel_behavior() -> void:
 	push_error("cancel_behavior() must be implemented by subclass.")
 	pass

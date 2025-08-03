@@ -37,7 +37,7 @@ func _ready():
 func _physics_process(_delta):
 	# follow if node is available and there is no more sequences to transition
 	if node_follow != null && last_played_idx >= len(sequences):
-		position = position .lerp(node_follow.position, follow_speed)
+		position = position.lerp(node_follow.position, follow_speed)
 	
 ## Creates a 'camera sequence' object and adds it to the active queue. 
 ## Intended to be called by outside handlers.

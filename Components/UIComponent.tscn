@@ -1,0 +1,141 @@
+[gd_scene load_steps=12 format=3 uid="uid://bbt3x8ytel0qp"]
+
+[ext_resource type="Texture2D" uid="uid://bx3cin15ooqu3" path="res://Assets/Images/lightbulbs.png" id="1_1jbtp"]
+[ext_resource type="Texture2D" uid="uid://cakfqya3wsln2" path="res://Assets/Images/gear.png" id="2_7qlpo"]
+[ext_resource type="Texture2D" uid="uid://c56y45uwi3b0v" path="res://Assets/Images/AnswerReady.png" id="3_4kbwj"]
+[ext_resource type="Texture2D" uid="uid://dwq2mm02e56bd" path="res://Assets/Images/Stats.png" id="4_a4iiu"]
+[ext_resource type="Texture2D" uid="uid://7bmo4jqw2u23" path="res://Assets/Images/Restart.png" id="5_gldbw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6spe"]
+atlas = ExtResource("1_1jbtp")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w20v0"]
+atlas = ExtResource("2_7qlpo")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ih7ss"]
+atlas = ExtResource("3_4kbwj")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5myha"]
+atlas = ExtResource("4_a4iiu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqh8p"]
+atlas = ExtResource("5_gldbw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrjml"]
+atlas = ExtResource("1_1jbtp")
+region = Rect2(0, 0, 32, 32)
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+zoom = Vector2(2, 2)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -48)
+
+[node name="BottomUI" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BottomUIBG" type="ColorRect" parent="BottomUI"]
+layout_mode = 2
+offset_left = -256.0
+offset_top = 208.0
+offset_right = 256.0
+offset_bottom = 312.0
+color = Color(0.564706, 0.564706, 0.564706, 1)
+
+[node name="Hint" type="TextureButton" parent="BottomUI"]
+texture_filter = 3
+layout_mode = 0
+offset_left = -128.0
+offset_top = 240.0
+offset_right = -96.0
+offset_bottom = 272.0
+scale = Vector2(1.5, 1.5)
+texture_normal = SubResource("AtlasTexture_d6spe")
+
+[node name="Settings" type="TextureButton" parent="BottomUI"]
+texture_filter = 3
+layout_mode = 0
+offset_left = -224.0
+offset_top = 224.0
+offset_right = -192.0
+offset_bottom = 256.0
+scale = Vector2(2.5, 2.5)
+texture_normal = SubResource("AtlasTexture_w20v0")
+
+[node name="AnswerReady" type="TextureButton" parent="BottomUI"]
+texture_filter = 3
+layout_mode = 0
+offset_left = -48.0
+offset_top = 212.0
+offset_right = -8.0
+offset_bottom = 252.0
+scale = Vector2(3, 3)
+texture_normal = SubResource("AtlasTexture_ih7ss")
+
+[node name="Stats" type="TextureButton" parent="BottomUI"]
+texture_filter = 3
+layout_mode = 0
+offset_left = 80.0
+offset_top = 240.0
+offset_right = 120.0
+offset_bottom = 280.0
+scale = Vector2(1.5, 1.5)
+texture_normal = SubResource("AtlasTexture_5myha")
+
+[node name="Restart" type="TextureButton" parent="BottomUI"]
+texture_filter = 3
+layout_mode = 0
+offset_left = 176.0
+offset_top = 240.0
+offset_right = 216.0
+offset_bottom = 280.0
+scale = Vector2(1.5, 1.5)
+texture_normal = SubResource("AtlasTexture_jqh8p")
+
+[node name="TopUI" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Bulbs" type="HBoxContainer" parent="TopUI"]
+layout_mode = 0
+offset_left = 416.0
+offset_top = -304.0
+offset_right = 484.0
+offset_bottom = -272.0
+scale = Vector2(2, 2)
+metadata/_edit_group_ = true
+
+[node name="Bulb1" type="TextureRect" parent="TopUI/Bulbs"]
+texture_filter = 3
+layout_mode = 2
+texture = SubResource("AtlasTexture_rrjml")
+
+[node name="Bulb2" type="TextureRect" parent="TopUI/Bulbs"]
+texture_filter = 3
+layout_mode = 2
+texture = SubResource("AtlasTexture_rrjml")
+
+[node name="TimeLabel" type="Label" parent="TopUI"]
+texture_filter = 3
+layout_mode = 0
+offset_left = -48.0
+offset_top = -304.0
+offset_right = 65.0
+offset_bottom = -281.0
+text = "Time Left: 3:00"
+
+[node name="Timer" type="Timer" parent="TopUI/TimeLabel"]

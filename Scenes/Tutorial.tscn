@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://brvgx4toir5sa"]
+[gd_scene load_steps=7 format=3 uid="uid://brvgx4toir5sa"]
 
 [ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="1_lb7nh"]
 [ext_resource type="Script" path="res://Scripts/LevelHandlers/TutorialHandler.gd" id="1_xvxu3"]
 [ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="2_tx68x"]
 [ext_resource type="PackedScene" uid="uid://bgdhlcn253ppt" path="res://Components/ParallaxComponent.tscn" id="3_vabsx"]
+[ext_resource type="PackedScene" uid="uid://bbt3x8ytel0qp" path="res://Components/UIComponent.tscn" id="5_oivqj"]
+[ext_resource type="AudioStream" uid="uid://d4h1pbic5jc51" path="res://Assets/Audio/jazz.mp3" id="6_gtcnd"]
 
 [node name="Tutorial" type="Node2D"]
 script = ExtResource("1_xvxu3")
@@ -16,6 +18,15 @@ node_follow = NodePath("../MascotComponent")
 zoom_amount = 2.0
 
 [node name="ParallaxComponent" parent="." instance=ExtResource("3_vabsx")]
+texture_filter = 3
+scale_bg = 2.0
 alpha_scale = 0.8
 scroll_offset = Vector2(0, 1000)
 scroll_speed = 80.0
+
+[node name="GameUI" parent="." instance=ExtResource("5_oivqj")]
+metadata/_edit_lock_ = true
+
+[node name="TutorialSong" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_gtcnd")
+volume_db = -20.0

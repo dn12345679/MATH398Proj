@@ -191,4 +191,3 @@ libraries = {
 
 [node name="SpeechSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_aumgk")
-volume_db = 15.0

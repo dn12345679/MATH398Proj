@@ -7,5 +7,6 @@ script = ExtResource("1_wjg12")
 cam = NodePath("Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
