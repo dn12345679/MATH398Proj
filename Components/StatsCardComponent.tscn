@@ -1,0 +1,154 @@
+[gd_scene load_steps=8 format=3 uid="uid://bq32anykrvxf7"]
+
+[ext_resource type="Script" path="res://Scripts/CardComponent.gd" id="1_ph6dt"]
+[ext_resource type="Texture2D" uid="uid://dpjnht8hxeyec" path="res://Assets/Images/Poker cards 1.3/Deck of cards ( full cards ).png" id="2_ie2ny"]
+[ext_resource type="Texture2D" uid="uid://cddas3xvwbe1y" path="res://Assets/Images/Poker cards 1.3/1.2 Poker cards.png" id="3_6j6pp"]
+
+[sub_resource type="Animation" id="Animation_4h60b"]
+resource_name = "CardShake"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardSprites:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.424115, 0.418879, -0.20944, 0.20944, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_vq28h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardSprites:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.424115]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CardSprites:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CardSprites:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7ayic"]
+resource_name = "Selected"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardSprites:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, -0.0698132, -0.122173, -0.15708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CardSprites:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CardSprites:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 8), Vector2(0, -8), Vector2(0, -16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k266f"]
+_data = {
+"CardShake": SubResource("Animation_4h60b"),
+"RESET": SubResource("Animation_vq28h"),
+"Selected": SubResource("Animation_7ayic")
+}
+
+[node name="CardComponent" type="Control" node_paths=PackedStringArray("card_front", "card_back", "anim", "audio")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ph6dt")
+card_front = NodePath("CardSprites/Front")
+card_back = NodePath("CardSprites/Back")
+anim = NodePath("CardAnimation")
+audio = NodePath("Card")
+
+[node name="CardSprites" type="Node2D" parent="."]
+rotation = -0.424115
+metadata/_edit_group_ = true
+
+[node name="Back" type="Sprite2D" parent="CardSprites"]
+visible = false
+texture_filter = 3
+texture = ExtResource("2_ie2ny")
+region_enabled = true
+region_rect = Rect2(48, 72, 48, 72)
+
+[node name="Front" type="Sprite2D" parent="CardSprites"]
+texture_filter = 3
+texture = ExtResource("3_6j6pp")
+region_enabled = true
+region_rect = Rect2(576, 0, 48, 64)
+
+[node name="CardAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_k266f")
+}
+
+[node name="HoverBlock" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 32.0
+color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true
+
+[node name="Card" type="AudioStreamPlayer2D" parent="."]
+volume_db = -20.0
+bus = &"SFX"
+
+[connection signal="mouse_entered" from="HoverBlock" to="." method="_on_hover_block_mouse_entered"]
+[connection signal="mouse_exited" from="HoverBlock" to="." method="_on_hover_block_mouse_exited"]

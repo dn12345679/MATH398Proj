@@ -1,32 +1,51 @@
-[gd_scene load_steps=7 format=3 uid="uid://brvgx4toir5sa"]
+[gd_scene load_steps=10 format=3 uid="uid://brvgx4toir5sa"]
 
 [ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="1_lb7nh"]
 [ext_resource type="Script" path="res://Scripts/LevelHandlers/TutorialHandler.gd" id="1_xvxu3"]
 [ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="2_tx68x"]
-[ext_resource type="PackedScene" uid="uid://bgdhlcn253ppt" path="res://Components/ParallaxComponent.tscn" id="3_vabsx"]
+[ext_resource type="Texture2D" uid="uid://88700bnnc808" path="res://Assets/Images/blackboard.png" id="2_xw8ba"]
 [ext_resource type="PackedScene" uid="uid://bbt3x8ytel0qp" path="res://Components/UIComponent.tscn" id="5_oivqj"]
 [ext_resource type="AudioStream" uid="uid://d4h1pbic5jc51" path="res://Assets/Audio/jazz.mp3" id="6_gtcnd"]
+[ext_resource type="Texture2D" uid="uid://5a8oc6fryqc" path="res://Assets/Images/gobutton.png" id="7_4cyau"]
+[ext_resource type="PackedScene" uid="uid://ict2dr1q6yv8" path="res://Components/PixelationTransitionComponent.tscn" id="8_ee33w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0b554"]
+atlas = ExtResource("7_4cyau")
+region = Rect2(0, 0, 48, 32)
 
 [node name="Tutorial" type="Node2D"]
 script = ExtResource("1_xvxu3")
+
+[node name="Blackboard" type="Sprite2D" parent="."]
+modulate = Color(0.717647, 0.717647, 0.717647, 0.607843)
+texture_filter = 3
+position = Vector2(0, 24)
+scale = Vector2(12, 12)
+texture = ExtResource("2_xw8ba")
 
 [node name="MascotComponent" parent="." node_paths=PackedStringArray("main") instance=ExtResource("1_lb7nh")]
 main = NodePath("..")
 
 [node name="CameraComponent" parent="." node_paths=PackedStringArray("node_follow") instance=ExtResource("2_tx68x")]
 node_follow = NodePath("../MascotComponent")
-zoom_amount = 2.0
 
-[node name="ParallaxComponent" parent="." instance=ExtResource("3_vabsx")]
-texture_filter = 3
-scale_bg = 2.0
-alpha_scale = 0.8
-scroll_offset = Vector2(0, 1000)
-scroll_speed = 80.0
+[node name="TutorialSong" type="AudioStreamPlayer2D" parent="." groups=["Soundtrack"]]
+stream = ExtResource("6_gtcnd")
+volume_db = -20.0
+bus = &"Music"
 
 [node name="GameUI" parent="." instance=ExtResource("5_oivqj")]
 metadata/_edit_lock_ = true
 
-[node name="TutorialSong" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_gtcnd")
-volume_db = -20.0
+[node name="ToMenu" type="TextureButton" parent="."]
+texture_filter = 3
+offset_left = -232.0
+offset_top = -128.0
+offset_right = -184.0
+offset_bottom = -88.0
+texture_normal = SubResource("AtlasTexture_0b554")
+
+[node name="Pixelation" parent="." instance=ExtResource("8_ee33w")]
+visible = false
+
+[connection signal="pressed" from="ToMenu" to="." method="_on_to_menu_pressed"]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ca3grmv65umbt"]
+
+[ext_resource type="Script" path="res://Scripts/QuincunxBall2D.gd" id="1_8bahr"]
+[ext_resource type="Texture2D" uid="uid://dpu6wtg1yjxcq" path="res://Assets/Images/quincunx_ball.png" id="2_x5uy8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ff53o"]
+radius = 12.0
+
+[node name="QuincunxBall2D" type="RigidBody2D"]
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_8bahr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ff53o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 3
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_x5uy8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

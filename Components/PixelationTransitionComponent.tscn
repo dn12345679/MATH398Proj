@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://ict2dr1q6yv8"]
+
+[ext_resource type="Script" path="res://Scripts/PixelationTransitionComponent.gd" id="1_hwl0w"]
+
+[sub_resource type="Shader" id="Shader_3lv1c"]
+code = "shader_type canvas_item;
+
+uniform float pixelation_amount : hint_range(1.0, 100.0) = 1.0;
+uniform float alpha_amount : hint_range(0.0, 1.0) = 0.4;
+
+
+void fragment() {
+    vec2 texture_size = 1.0 / TEXTURE_PIXEL_SIZE;
+
+    vec2 pixel_size = vec2(pixelation_amount) / texture_size;
+
+    vec2 pixelated_uv = floor(UV / pixel_size) * pixel_size;
+
+    COLOR = texture(TEXTURE, pixelated_uv);
+	COLOR.a = alpha_amount;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nbily"]
+shader = SubResource("Shader_3lv1c")
+shader_parameter/pixelation_amount = 1.0
+shader_parameter/alpha_amount = 0.4
+
+[node name="Pixelation" type="Node2D"]
+z_index = 99
+script = ExtResource("1_hwl0w")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_nbily")
+offset_left = -960.0
+offset_top = -776.0
+offset_right = 1152.0
+offset_bottom = 640.0
+mouse_filter = 2

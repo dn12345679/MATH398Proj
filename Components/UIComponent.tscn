@@ -1,10 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbt3x8ytel0qp"]
+[gd_scene load_steps=22 format=3 uid="uid://bbt3x8ytel0qp"]
 
 [ext_resource type="Texture2D" uid="uid://bx3cin15ooqu3" path="res://Assets/Images/lightbulbs.png" id="1_1jbtp"]
+[ext_resource type="Script" path="res://Scripts/UIComponent.gd" id="1_spjtn"]
 [ext_resource type="Texture2D" uid="uid://cakfqya3wsln2" path="res://Assets/Images/gear.png" id="2_7qlpo"]
+[ext_resource type="PackedScene" uid="uid://bw21ix10kbkc8" path="res://Components/UIComponents/HintComponent.tscn" id="2_bwv2t"]
 [ext_resource type="Texture2D" uid="uid://c56y45uwi3b0v" path="res://Assets/Images/AnswerReady.png" id="3_4kbwj"]
 [ext_resource type="Texture2D" uid="uid://dwq2mm02e56bd" path="res://Assets/Images/Stats.png" id="4_a4iiu"]
+[ext_resource type="PackedScene" uid="uid://djf665cqk8kww" path="res://Components/UIComponents/SettingsComponent.tscn" id="4_ib55k"]
 [ext_resource type="Texture2D" uid="uid://7bmo4jqw2u23" path="res://Assets/Images/Restart.png" id="5_gldbw"]
+[ext_resource type="PackedScene" uid="uid://ti3252exa7r8" path="res://Components/AnswerComponent.tscn" id="9_2bru1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d6spe"]
 atlas = ExtResource("1_1jbtp")
@@ -26,21 +30,152 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("5_gldbw")
 region = Rect2(0, 0, 32, 32)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i81rq"]
+load_path = "res://.godot/imported/lightbulbs.png-a85d92d6416b8ac8db5b9e93e06d9444.ctex"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_rrjml"]
-atlas = ExtResource("1_1jbtp")
+atlas = SubResource("CompressedTexture2D_i81rq")
 region = Rect2(0, 0, 32, 32)
 
-[node name="GameUI" type="Control"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_efq2p"]
+atlas = SubResource("CompressedTexture2D_i81rq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="Animation" id="Animation_7h3iy"]
+resource_name = "AnswerPressed"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BottomUI/AnswerReady:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.326377, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_b4hl5"]
+resource_name = "BulbPressed"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BottomUI/Hint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-128, 240), Vector2(-144, 224), Vector2(-128, 224), Vector2(-128, 240)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BottomUI/Hint:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(2, 2), Vector2(2, 2), Vector2(1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BottomUI/Hint:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.164061, 0.164061, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_iy6ku"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BottomUI/Hint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-128, 240)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BottomUI/Hint:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BottomUI/Hint:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BottomUI/AnswerReady:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rfeak"]
+_data = {
+"AnswerPressed": SubResource("Animation_7h3iy"),
+"BulbPressed": SubResource("Animation_b4hl5"),
+"RESET": SubResource("Animation_iy6ku")
+}
+
+[node name="GameUI" type="Control" node_paths=PackedStringArray("hint_btn", "settings_btn", "answer_btn", "stats_btn", "restart_btn", "hint_bulbs", "answer", "time_label", "timer", "audio", "anim", "settings_menu")]
 layout_mode = 3
 anchors_preset = 0
 scale = Vector2(0.5, 0.5)
+script = ExtResource("1_spjtn")
+hint_btn = NodePath("BottomUI/Hint")
+settings_btn = NodePath("BottomUI/Settings")
+answer_btn = NodePath("BottomUI/AnswerReady")
+stats_btn = NodePath("BottomUI/Stats")
+restart_btn = NodePath("BottomUI/Restart")
+hint_bulbs = NodePath("TopUI/Bulbs")
+answer = NodePath("AnswerComponent")
+time_label = NodePath("TopUI/TimeLabel")
+timer = NodePath("TopUI/TimeLabel/Timer")
+audio = NodePath("UISFX")
+anim = NodePath("UIAnimations")
+settings_menu = NodePath("UIFolder/Settings")
+hint_popup = ExtResource("2_bwv2t")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
 zoom = Vector2(2, 2)
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(0, -48)
 
 [node name="BottomUI" type="Control" parent="."]
 anchors_preset = 0
@@ -53,7 +188,7 @@ offset_left = -256.0
 offset_top = 208.0
 offset_right = 256.0
 offset_bottom = 312.0
-color = Color(0.564706, 0.564706, 0.564706, 1)
+color = Color(0.356863, 0.215686, 0.0588235, 1)
 
 [node name="Hint" type="TextureButton" parent="BottomUI"]
 texture_filter = 3
@@ -68,11 +203,11 @@ texture_normal = SubResource("AtlasTexture_d6spe")
 [node name="Settings" type="TextureButton" parent="BottomUI"]
 texture_filter = 3
 layout_mode = 0
-offset_left = -224.0
-offset_top = 224.0
-offset_right = -192.0
-offset_bottom = 256.0
-scale = Vector2(2.5, 2.5)
+offset_left = -238.0
+offset_top = 216.0
+offset_right = -206.0
+offset_bottom = 248.0
+scale = Vector2(3, 3)
 texture_normal = SubResource("AtlasTexture_w20v0")
 
 [node name="AnswerReady" type="TextureButton" parent="BottomUI"]
@@ -127,7 +262,7 @@ texture = SubResource("AtlasTexture_rrjml")
 [node name="Bulb2" type="TextureRect" parent="TopUI/Bulbs"]
 texture_filter = 3
 layout_mode = 2
-texture = SubResource("AtlasTexture_rrjml")
+texture = SubResource("AtlasTexture_efq2p")
 
 [node name="TimeLabel" type="Label" parent="TopUI"]
 texture_filter = 3
@@ -139,3 +274,40 @@ offset_bottom = -281.0
 text = "Time Left: 3:00"
 
 [node name="Timer" type="Timer" parent="TopUI/TimeLabel"]
+autostart = true
+
+[node name="UIFolder" type="Node2D" parent="."]
+position = Vector2(-544, -320)
+
+[node name="Settings" parent="UIFolder" instance=ExtResource("4_ib55k")]
+visible = false
+modulate = Color(1, 1, 1, 0)
+z_index = 999
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="UIAnimations" type="AnimationPlayer" parent="."]
+process_mode = 3
+libraries = {
+"": SubResource("AnimationLibrary_rfeak")
+}
+
+[node name="UISFX" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+
+[node name="AnswerComponent" parent="." instance=ExtResource("9_2bru1")]
+visible = false
+layout_mode = 1
+offset_left = -576.0
+offset_top = -320.0
+offset_right = -576.0
+offset_bottom = -320.0
+
+[connection signal="pressed" from="BottomUI/Hint" to="." method="_on_hint_pressed"]
+[connection signal="pressed" from="BottomUI/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="BottomUI/AnswerReady" to="." method="_on_answer_ready_pressed"]
+[connection signal="pressed" from="BottomUI/Stats" to="." method="_on_stats_pressed"]
+[connection signal="pressed" from="BottomUI/Restart" to="." method="_on_restart_pressed"]
+[connection signal="timeout" from="TopUI/TimeLabel/Timer" to="." method="_on_timer_timeout"]

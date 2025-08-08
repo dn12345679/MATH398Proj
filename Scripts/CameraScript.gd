@@ -9,7 +9,7 @@ extends Node2D
 @export var follow_speed: float = 0.7
 @export var camera_center: Vector2 = Vector2.ZERO
 
-@export var zoom_amount: float = 1.0:
+@export var zoom_amount: float = 2.0:
 	set(value):
 		zoom_amount = value
 		if cam:

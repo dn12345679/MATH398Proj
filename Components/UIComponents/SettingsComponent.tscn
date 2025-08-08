@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://djf665cqk8kww"]
+
+[ext_resource type="Script" path="res://Scripts/SettingsScript.gd" id="1_3rfa7"]
+[ext_resource type="Texture2D" uid="uid://bwg0hro2y0yyy" path="res://Assets/Images/pause.png" id="2_fndgo"]
+[ext_resource type="Texture2D" uid="uid://5a8oc6fryqc" path="res://Assets/Images/gobutton.png" id="3_pexlr"]
+[ext_resource type="AudioStream" uid="uid://dwj1k6bletkjo" path="res://Assets/Audio/bossabreeze.mp3" id="4_nj0j6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mm488"]
+atlas = ExtResource("2_fndgo")
+region = Rect2(0, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_alrqg"]
+atlas = ExtResource("3_pexlr")
+region = Rect2(0, 0, 48, 32)
+
+[node name="Settings" type="Control" node_paths=PackedStringArray("audio")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = -160.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3rfa7")
+audio = NodePath("PauseTheme")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_filter = 3
+layout_mode = 0
+offset_left = 112.0
+offset_top = -8.0
+offset_right = 176.0
+offset_bottom = 40.0
+scale = Vector2(14, 14)
+texture = SubResource("AtlasTexture_mm488")
+
+[node name="SFXLabel" type="Label" parent="."]
+texture_filter = 3
+layout_mode = 0
+offset_left = 248.0
+offset_top = 344.0
+offset_right = 288.0
+offset_bottom = 367.0
+scale = Vector2(4, 4)
+text = "SFX
+"
+
+[node name="PauseTheme" type="AudioStreamPlayer2D" parent="." groups=["Soundtrack"]]
+stream = ExtResource("4_nj0j6")
+volume_db = -10.0
+bus = &"Music"
+
+[node name="PauseMenuOptions" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 528.0
+offset_right = 552.0
+offset_bottom = 568.0
+scale = Vector2(3, 3)
+metadata/_edit_group_ = true
+
+[node name="ExitMenu" type="TextureButton" parent="PauseMenuOptions"]
+texture_filter = 3
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_alrqg")
+
+[node name="AudioSliders" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MusicSlider" type="HSlider" parent="AudioSliders"]
+texture_filter = 3
+layout_mode = 0
+offset_left = 408.0
+offset_top = 152.0
+offset_right = 540.0
+offset_bottom = 200.0
+scale = Vector2(4, 4)
+min_value = -50.0
+max_value = 6.0
+
+[node name="SFXSlider" type="HSlider" parent="AudioSliders"]
+layout_mode = 0
+offset_left = 408.0
+offset_top = 352.0
+offset_right = 540.0
+offset_bottom = 368.0
+scale = Vector2(4, 4)
+min_value = -50.0
+max_value = 6.0
+
+[connection signal="pressed" from="PauseMenuOptions/ExitMenu" to="." method="_on_exit_menu_pressed"]
+[connection signal="value_changed" from="AudioSliders/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="AudioSliders/SFXSlider" to="." method="_on_sfx_slider_value_changed"]

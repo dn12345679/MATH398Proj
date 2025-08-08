@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4ovib41ojf05"]
+
+[ext_resource type="Script" path="res://Scripts/Quincunx2D.gd" id="1_8sk5r"]
+
+[node name="Quincunx2D" type="Node2D"]
+position = Vector2(40, -160)
+script = ExtResource("1_8sk5r")
+spacing = 48.0

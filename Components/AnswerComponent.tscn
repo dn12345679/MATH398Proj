@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://ti3252exa7r8"]
+
+[ext_resource type="Texture2D" uid="uid://88700bnnc808" path="res://Assets/Images/blackboard.png" id="1_iu6ig"]
+[ext_resource type="Script" path="res://Scripts/AnswerScript.gd" id="1_qmwdh"]
+[ext_resource type="Texture2D" uid="uid://c56y45uwi3b0v" path="res://Assets/Images/AnswerReady.png" id="2_7u1cc"]
+[ext_resource type="Texture2D" uid="uid://5a8oc6fryqc" path="res://Assets/Images/gobutton.png" id="4_41w55"]
+
+[node name="AnswerComponent" type="Control" node_paths=PackedStringArray("question_text", "answer_box")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qmwdh")
+question_text = NodePath("Question/QuestionLabel")
+answer_box = NodePath("Answer/TextEdit")
+
+[node name="Blackboard" type="Sprite2D" parent="."]
+texture_filter = 3
+position = Vector2(576, 384)
+scale = Vector2(24, 24)
+texture = ExtResource("1_iu6ig")
+
+[node name="Question" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 120.0
+offset_right = 960.0
+offset_bottom = 264.0
+color = Color(0.854902, 0.854902, 0.854902, 0.823529)
+
+[node name="QuestionLabel" type="Label" parent="Question"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 744.0
+offset_bottom = 120.0
+text = "Example Question: What is the answer to this problem? How can you tell?"
+
+[node name="Answer" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 408.0
+offset_top = 352.0
+offset_right = 736.0
+offset_bottom = 464.0
+color = Color(1, 1, 1, 0)
+metadata/_edit_group_ = true
+
+[node name="TextEdit" type="TextEdit" parent="Answer"]
+layout_mode = 0
+offset_right = 328.0
+offset_bottom = 112.0
+placeholder_text = "Enter Your Answer Here. Percentages should be rounded to the form 0.xxx"
+wrap_mode = 1
+autowrap_mode = 2
+
+[node name="Submit" type="TextureButton" parent="."]
+texture_filter = 3
+layout_mode = 0
+offset_left = 768.0
+offset_top = 352.0
+offset_right = 800.0
+offset_bottom = 384.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("2_7u1cc")
+
+[node name="Back" type="TextureButton" parent="."]
+texture_filter = 3
+layout_mode = 0
+offset_left = 96.0
+offset_top = 392.0
+offset_right = 144.0
+offset_bottom = 424.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("4_41w55")
+
+[connection signal="pressed" from="Submit" to="." method="_on_submit_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

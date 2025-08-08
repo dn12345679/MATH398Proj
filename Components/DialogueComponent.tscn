@@ -189,5 +189,6 @@ libraries = {
 "": SubResource("AnimationLibrary_77nm0")
 }
 
-[node name="SpeechSound" type="AudioStreamPlayer2D" parent="."]
+[node name="SpeechSound" type="AudioStreamPlayer2D" parent="." groups=["Dialogue"]]
 stream = ExtResource("2_aumgk")
+bus = &"SFX"

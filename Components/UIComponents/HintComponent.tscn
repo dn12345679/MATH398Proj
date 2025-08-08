@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw21ix10kbkc8"]
+
+[ext_resource type="Script" path="res://Scripts/HintScript.gd" id="1_5ens5"]
+[ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="2_lvtwd"]
+[ext_resource type="AudioStream" uid="uid://fr11oamq34uj" path="res://Assets/Audio/writing2.mp3" id="3_lj8di"]
+[ext_resource type="Texture2D" uid="uid://5a8oc6fryqc" path="res://Assets/Images/gobutton.png" id="4_4p8bn"]
+
+[node name="Hint" type="Control" node_paths=PackedStringArray("text_node", "audio")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_5ens5")
+text_node = NodePath("Hint")
+audio = NodePath("HintAudio")
+metadata/_edit_lock_ = true
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -1472.0
+offset_top = -672.0
+offset_right = 1584.0
+offset_bottom = 816.0
+color = Color(0.537255, 0.537255, 0.537255, 0.196078)
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -448.0
+offset_top = -192.0
+offset_right = 448.0
+offset_bottom = 192.0
+color = Color(9.8668e-07, 0.382886, 0.293808, 1)
+metadata/_edit_lock_ = true
+
+[node name="Hint" type="Label" parent="."]
+layout_mode = 0
+offset_left = -384.0
+offset_top = -128.0
+offset_right = 304.0
+offset_bottom = 128.0
+text = "How can I figure out this problem?
+
+The Simplest way to understand this problem is to know how this problem works.
+
+One of the ways that I find it most helpful is to learn the problem
+
+
+
+1/2"
+autowrap_mode = 3
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="MascotComponent" parent="." instance=ExtResource("2_lvtwd")]
+position = Vector2(368, 112)
+
+[node name="HintAudio" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-576, -320)
+stream = ExtResource("3_lj8di")
+
+[node name="ExitHint" type="TextureButton" parent="."]
+texture_filter = 3
+layout_mode = 0
+offset_left = -432.0
+offset_top = -176.0
+offset_right = -384.0
+offset_bottom = -136.0
+texture_normal = ExtResource("4_4p8bn")
+
+[connection signal="pressed" from="ExitHint" to="." method="_on_exit_hint_pressed"]
