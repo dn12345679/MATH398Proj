@@ -7,6 +7,7 @@
 radius = 12.0
 
 [node name="QuincunxBall2D" type="RigidBody2D"]
+collision_layer = 2
 max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_8bahr")
@@ -19,5 +20,3 @@ texture_filter = 3
 position = Vector2(2.38419e-07, 2.38419e-07)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_x5uy8")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

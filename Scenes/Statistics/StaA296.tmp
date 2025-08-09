@@ -35,7 +35,7 @@ texture = ExtResource("3_8rtlb")
 [node name="CameraComponent" parent="." instance=ExtResource("1_l3e3o")]
 
 [node name="MascotComponent" parent="." instance=ExtResource("2_bwrmu")]
-position = Vector2(-179, -24)
+position = Vector2(-192, 64)
 
 [node name="Pixelation" parent="." instance=ExtResource("3_h1iwf")]
 visible = false

@@ -1,12 +1,23 @@
 class_name QuincunxHandler
 extends Handler
 
+@export_category("Nodes")
+@export var spawn_handler: Control
+@export var chart: DistributionChart
 
-# Called when the node enters the scene tree for the first time.
+
+@export var quincunx_ball: PackedScene
+
 func _ready():
-	pass # Replace with function body.
+	print(get_node("MascotComponent").position)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+# spawn a quincunx
+func _on_spawn_ball_pressed():
+	var ball: QuincunxBall2D = quincunx_ball.instantiate()
+	spawn_handler.get_node("QuincunxSpawn").call_deferred("add_child", ball)
+
+
+# to queue free the balls and reduce lag, and for plotting
+func _on_ball_counter_body_entered(body):
+	chart.add_point(body.global_position)

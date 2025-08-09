@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://7wejgylivpdc"]
+
+[ext_resource type="Script" path="res://Scripts/DistributionChart.gd" id="1_l6rpd"]
+
+[node name="DistributionChart" type="Node2D"]
+script = ExtResource("1_l6rpd")
+
+[node name="Camera2D" type="Camera2D" parent="."]

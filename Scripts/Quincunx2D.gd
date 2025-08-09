@@ -15,8 +15,8 @@ extends Node2D
 
 func _ready():
 	initialize_pegs(spacing, layers)
-	include_sidebar(1)
-	include_sidebar(-1)
+	#include_sidebar(1)
+	#include_sidebar(-1)
 
 func initialize_pegs(px_spacing: float, px_layers: int):
 	var offset: Vector2 = initial_peg_center # set peg 1
