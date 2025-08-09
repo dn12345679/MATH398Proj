@@ -14,7 +14,12 @@ signal text_finished
 @export var color_node: ColorRect
 @export var audio: AudioStreamPlayer2D
 
-
+func _input(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if (text_node.visible_characters < len(text)):
+			text_node.visible_characters = len(text)
+		elif (text_node.visible_characters >= len(text)):
+			emit_signal("text_finished")
 
 func setup(new_text: String, duration: float, init_mood: String):
 	text = new_text
@@ -54,18 +59,16 @@ func play_text(duration: float) -> void:
 	audio.play()
 	tween.tween_property(text_node, "visible_characters", len(text), duration)
 
-func _input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if (text_node.visible_characters < len(text)):
-			text_node.visible_characters = len(text)
-		elif (text_node.visible_characters >= len(text)):
-			emit_signal("text_finished")
+
 
 # important: only runs after animation is finished
 func _after_finish(_animation) -> void:
 	pass
 	# other logic like changing to next text
-	
+
+func hide_self() -> void:
+	visible = false	
+
 func remove_self() -> void:
 	animate("Exit")
 	await animator.animation_finished	

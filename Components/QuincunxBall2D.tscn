@@ -1,16 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://ca3grmv65umbt"]
+[gd_scene load_steps=5 format=3 uid="uid://ca3grmv65umbt"]
 
 [ext_resource type="Script" path="res://Scripts/QuincunxBall2D.gd" id="1_8bahr"]
 [ext_resource type="Texture2D" uid="uid://dpu6wtg1yjxcq" path="res://Assets/Images/quincunx_ball.png" id="2_x5uy8"]
+[ext_resource type="AudioStream" uid="uid://df0k0d6yd6gp4" path="res://Assets/Audio/place_down.mp3" id="3_ic4v6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ff53o"]
 radius = 12.0
 
-[node name="QuincunxBall2D" type="RigidBody2D"]
+[node name="QuincunxBall2D" type="RigidBody2D" node_paths=PackedStringArray("audio")]
 collision_layer = 2
 max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_8bahr")
+audio = NodePath("AudioStreamPlayer2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ff53o")
@@ -20,3 +22,8 @@ texture_filter = 3
 position = Vector2(2.38419e-07, 2.38419e-07)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_x5uy8")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ic4v6")
+volume_db = -15.0
+bus = &"SFX"

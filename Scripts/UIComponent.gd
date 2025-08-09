@@ -1,8 +1,15 @@
 class_name UIComponent
 extends Control
 
+signal answer_correct(answer)
+signal answer_incorrect(answer)
+
+
 ## requires parent to have implementation for 
 	## hint and answer	
+
+@export_category("Parent")
+@export var level_handler: Handler
 
 @export_category("UI Nodes")
 @export var hint_btn: TextureButton
@@ -28,6 +35,16 @@ extends Control
 
 var curr_level_resource # current level resource data for displaying hints
 var current_hint: int = 0
+
+func _ready():
+	answer.answer_incorrect.connect(signal_incorrect)
+
+
+
+
+# this is out of place, but it just makes the Mascot react to incorrect answers
+func signal_incorrect(ans):
+	level_handler.add_incorrect()
 
 func _on_hint_pressed():
 	anim.play("BulbPressed")
@@ -55,7 +72,8 @@ func _on_answer_ready_pressed():
 	audio.stream = load("res://Assets/Audio/ready.mp3")
 	audio.play()
 	answer.visible = true
-
+	get_tree().paused = true
+	answer.question_text.text = curr_level_resource.objective_type
 
 func _on_stats_pressed():
 	pass # Replace with function body.

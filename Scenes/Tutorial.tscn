@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://brvgx4toir5sa"]
+[gd_scene load_steps=26 format=3 uid="uid://brvgx4toir5sa"]
 
 [ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="1_lb7nh"]
 [ext_resource type="Script" path="res://Scripts/LevelHandlers/TutorialHandler.gd" id="1_xvxu3"]
@@ -8,13 +8,142 @@
 [ext_resource type="AudioStream" uid="uid://d4h1pbic5jc51" path="res://Assets/Audio/jazz.mp3" id="6_gtcnd"]
 [ext_resource type="Texture2D" uid="uid://5a8oc6fryqc" path="res://Assets/Images/gobutton.png" id="7_4cyau"]
 [ext_resource type="PackedScene" uid="uid://ict2dr1q6yv8" path="res://Components/PixelationTransitionComponent.tscn" id="8_ee33w"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueResource.gd" id="9_fms8m"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueEntry.gd" id="10_ir8np"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0b554"]
 atlas = ExtResource("7_4cyau")
 region = Rect2(0, 0, 48, 32)
 
-[node name="Tutorial" type="Node2D"]
+[sub_resource type="Resource" id="Resource_ak0i8"]
+resource_name = "custom initial name"
+script = ExtResource("10_ir8np")
+id = 0
+dialogue = "Hello, welcome to the tutorial!"
+location = Vector2(0, 0)
+duration = 1.0
+mood = "Wave"
+
+[sub_resource type="Resource" id="Resource_hwiof"]
+resource_name = "DefaultName"
+script = ExtResource("10_ir8np")
+id = 0
+dialogue = "In this tutorial I will show you"
+location = Vector2(0, 0)
+duration = 1.5
+mood = "Speaking"
+
+[sub_resource type="Resource" id="Resource_gmci8"]
+resource_name = "DefaultName"
+script = ExtResource("10_ir8np")
+id = 0
+dialogue = "How to interact with my teaching tool!"
+location = Vector2(0, 0)
+duration = 1.4
+mood = "Speaking"
+
+[sub_resource type="Resource" id="Resource_wru57"]
+resource_name = "DefaultName"
+script = ExtResource("10_ir8np")
+id = 1
+dialogue = "Over here is the game buttons"
+location = Vector2(-91, 84)
+duration = 0.6
+mood = "Question"
+
+[sub_resource type="Resource" id="Resource_ijj8u"]
+resource_name = "DefaultName"
+script = ExtResource("10_ir8np")
+id = 1
+dialogue = "This first one is for accessing settings, like volume!"
+location = Vector2(-91, 84)
+duration = 0.8
+mood = "Speaking"
+
+[sub_resource type="Resource" id="Resource_3nrj3"]
+resource_name = "DefaultName"
+script = ExtResource("10_ir8np")
+id = 1
+dialogue = "The one on the right is for hints, to get help!"
+location = Vector2(-91, 84)
+duration = 0.5
+mood = "Thinking"
+
+[sub_resource type="Resource" id="Resource_n3ymg"]
+resource_name = "DefaultName"
+script = ExtResource("10_ir8np")
+id = 1
+dialogue = "The BIG middle one is to answer the question!"
+location = Vector2(-91, 84)
+duration = 0.6
+mood = "Correct"
+
+[sub_resource type="Resource" id="Resource_qit35"]
+resource_name = "DefaultName"
+script = ExtResource("10_ir8np")
+id = 1
+dialogue = "The bar chart shows your stats if you are curious"
+location = Vector2(-91, 84)
+duration = 0.7
+mood = "Speaking"
+
+[sub_resource type="Resource" id="Resource_kcxsg"]
+resource_name = "DefaultName"
+script = ExtResource("10_ir8np")
+id = 1
+dialogue = "And the last one is if you ever want to restart the level!"
+location = Vector2(-91, 84)
+duration = 0.6
+mood = "Time"
+
+[sub_resource type="Resource" id="Resource_fck0n"]
+resource_name = "DefaultName"
+script = ExtResource("10_ir8np")
+id = 2
+dialogue = "Up here are the timer and the hint counter"
+location = Vector2(122, -80)
+duration = 0.7
+mood = "Thinking"
+
+[sub_resource type="Resource" id="Resource_f3uqy"]
+resource_name = "DefaultName"
+script = ExtResource("10_ir8np")
+id = 2
+dialogue = "When you get an answer incorrect, you lose a hint, but..."
+location = Vector2(122, -80)
+duration = 0.9
+mood = "Incorrect"
+
+[sub_resource type="Resource" id="Resource_2r84t"]
+resource_name = "DefaultName"
+script = ExtResource("10_ir8np")
+id = 2
+dialogue = "... Keep going! There is no penalty aside from losing hints."
+location = Vector2(122, -80)
+duration = 0.8
+mood = "Correct"
+
+[sub_resource type="Resource" id="Resource_8m7iq"]
+resource_name = "DefaultName"
+script = ExtResource("10_ir8np")
+id = 2
+dialogue = "The timer will be used to calculate your final score!"
+location = Vector2(122, -80)
+duration = 0.9
+mood = "Time"
+
+[sub_resource type="Resource" id="Resource_liy4h"]
+resource_name = "DefaultName"
+script = ExtResource("10_ir8np")
+id = 3
+dialogue = "That's all for the tutorial! Exit to the menu and choose a topic!"
+location = Vector2(0, 0)
+duration = 1.0
+mood = "Wave"
+
+[node name="Tutorial" type="Node2D" node_paths=PackedStringArray("dialogue")]
 script = ExtResource("1_xvxu3")
+dialogue = NodePath("DialogueNode")
 
 [node name="Blackboard" type="Sprite2D" parent="."]
 modulate = Color(0.717647, 0.717647, 0.717647, 0.607843)
@@ -47,5 +176,9 @@ texture_normal = SubResource("AtlasTexture_0b554")
 
 [node name="Pixelation" parent="." instance=ExtResource("8_ee33w")]
 visible = false
+
+[node name="DialogueNode" type="Node2D" parent="."]
+script = ExtResource("9_fms8m")
+custom_res = Array[Resource]([SubResource("Resource_ak0i8"), SubResource("Resource_hwiof"), SubResource("Resource_gmci8"), SubResource("Resource_wru57"), SubResource("Resource_ijj8u"), SubResource("Resource_3nrj3"), SubResource("Resource_n3ymg"), SubResource("Resource_qit35"), SubResource("Resource_kcxsg"), SubResource("Resource_fck0n"), SubResource("Resource_f3uqy"), SubResource("Resource_2r84t"), SubResource("Resource_8m7iq"), SubResource("Resource_liy4h")])
 
 [connection signal="pressed" from="ToMenu" to="." method="_on_to_menu_pressed"]

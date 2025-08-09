@@ -9,6 +9,8 @@ extends Node2D
 @export var bin_radius: float = 36.0 
 @export var tick_size: float = 10.0 # 4 pixel per 1
 
+@export var graph_position: Vector2 = Vector2.ZERO
+
 @export var min_value: float = -176.0 # expected minimum (tested)
 @export var max_value: float = 184.0 # expected maximum (-176 + num_bins * bin_spacing)
 
@@ -19,8 +21,8 @@ func _ready():
 		bins.append(0) # count of 0 at each "bin"
 
 
-
 func _draw():	
+	draw_set_transform(graph_position, 0, Vector2.ONE)
 	var initial_position: Vector2 = Vector2.ZERO
 	for i in range(num_bins):
 			
@@ -30,7 +32,7 @@ func _draw():
 			Vector2(initial_position.x + bin_spacing, -tick_size * bins[i]),
 			Vector2(initial_position.x, -tick_size * bins[i])
 		])
-		draw_colored_polygon(points, Color.BLUE)
+		draw_colored_polygon(points, Color(0.3, 0.3, 0.8, 0.2))
 		
 		initial_position.x += bin_spacing 
 

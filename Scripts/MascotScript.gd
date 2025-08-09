@@ -2,6 +2,7 @@ class_name MascotComponent
 extends AnimatedCharacterInterface
 
 signal speech_finished
+signal interjection
 
 @export_category("Mascot Properties")
 @export var sprite: AnimatedSprite2D
@@ -31,10 +32,15 @@ func get_bank() -> void:
 
 ## Handles creating and initializing character speech bubbles, with speech_bank_idx
 	## as a fallback in case the dialogue is from the speech bank
-func speak(dialogue: String = "", speech_bank_idx: int = -1) -> void:
+func speak(dialogue: String = "", speech_bank_idx: int = -1, sp_comp_manual: DialogueComponent = null) -> void:
 	# prevent errors from finishing dialogue
-	if speech_bank_idx < len(dialogues):
-		var sp_comp: DialogueComponent = self.dialogues[speech_bank_idx]
+	if speech_bank_idx < len(dialogues) || sp_comp_manual != null:
+		var sp_comp: DialogueComponent
+		# in the case that manual speaking (interjecting) is necessary
+		if sp_comp_manual != null:
+			sp_comp = sp_comp_manual
+		else:
+			sp_comp = self.dialogues[speech_bank_idx]
 		
 		if dialogue == "" || dialogue == null:
 			dialogue = sp_comp.get_text()
@@ -43,6 +49,9 @@ func speak(dialogue: String = "", speech_bank_idx: int = -1) -> void:
 		mood(sp_comp.mood)
 		
 		self.add_child.call_deferred(sp_comp) # auto text
+		if sp_comp_manual == null:
+			connect("interjection", Callable(sp_comp, "hide_self"))
+			# in case of interjection, hide main text
 		
 		# hard-coded but this properly centers all text boxes
 		sp_comp.position.y -= 64
@@ -50,10 +59,12 @@ func speak(dialogue: String = "", speech_bank_idx: int = -1) -> void:
 		
 		await sp_comp.text_finished
 	
-	if (speech_bank_idx + 1 < len(dialogues)):
-		speak("", speech_bank_idx + 1)
-	else:
-		speech_finished.emit()
+	# don't increment if it is an interjection, as it is not part of the bank
+	if sp_comp_manual == null:
+		if (speech_bank_idx + 1 < len(dialogues)):
+			speak("", speech_bank_idx + 1)
+		else:
+			speech_finished.emit()
 
 
 

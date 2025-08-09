@@ -8,6 +8,7 @@ extends Node2D
 @export var spacing: float = 32.0 # default 32 pixels apart
 @export var radius: float = 6.0
 @export var initial_peg_center: Vector2 = Vector2.ZERO
+@export var can_delete_pegs: bool = false
 
 @onready var peg_img = preload("res://Assets/Images/quincunx_peg.png")
 @onready var ball_img = preload("res://Assets/Images/quincunx_ball.png")
@@ -21,7 +22,7 @@ func _ready():
 func initialize_pegs(px_spacing: float, px_layers: int):
 	var offset: Vector2 = initial_peg_center # set peg 1
 	# since range is noninclusive ; i do +1 so it makes more sense
-	for i in range(layers + 1):
+	for i in range(px_layers + 1):
 		offset.y += px_spacing * i # offset the y for each layer
 		offset.x -= px_spacing * i * 0.75 # constant for initial offset
 		for j in range(i):
@@ -30,10 +31,18 @@ func initialize_pegs(px_spacing: float, px_layers: int):
 		offset = initial_peg_center
 	
 func create_peg(pos: Vector2):
+	var peg_holder: Control = Control.new()
 	var peg: StaticBody2D = StaticBody2D.new()
+	peg.add_to_group("QuincunxPeg")
 	var peg_collider: CollisionShape2D = CollisionShape2D.new()
-	var sprite: Sprite2D = Sprite2D.new()
+	var sprite: TextureRect = TextureRect.new()
 		# set the sprite features first
+	
+	# to do peg_click deletions, I need to offset, since this only 
+		#works if the sprite is a textureRect
+	sprite.offset_top = -16
+	sprite.offset_left = -16
+		
 	sprite.texture = peg_img 
 	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
 	peg_collider.shape = CircleShape2D.new()
@@ -41,10 +50,21 @@ func create_peg(pos: Vector2):
 	# create peg
 	peg.add_child(peg_collider)
 	peg.add_child(sprite)	
+	peg_holder.add_child(peg)
 	
 	# add it to tree at the position
-	add_child(peg)
-	peg.position = pos
+	add_child(peg_holder)
+	peg_holder.position = pos
+	
+	# only do this if pegs are allowed to be deleted for this activity
+	if can_delete_pegs:
+		peg_holder.connect(
+			"gui_input", Callable(self, "_on_peg_clicked").bind(peg_holder)
+		)
+
+func _on_peg_clicked(event, child):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		child.queue_free()
 
 func include_sidebar(left_or_right: int):
 	var bar: StaticBody2D = StaticBody2D.new()

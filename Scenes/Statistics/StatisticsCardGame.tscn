@@ -1,17 +1,37 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3vfl5egjmoc8"]
+[gd_scene load_steps=15 format=3 uid="uid://d3vfl5egjmoc8"]
 
 [ext_resource type="Script" path="res://Scripts/LevelHandlers/StatisticsCardHandler.gd" id="1_ebgro"]
 [ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="2_0i0fj"]
 [ext_resource type="PackedScene" uid="uid://bq32anykrvxf7" path="res://Components/StatsCardComponent.tscn" id="2_thh4u"]
-[ext_resource type="Resource" uid="uid://cmypvwyjsdu21" path="res://Resources/Stat1.tres" id="3_mrbhl"]
+[ext_resource type="Resource" uid="uid://cmypvwyjsdu21" path="res://Resources/Stat1_Card.tres" id="3_mrbhl"]
 [ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="3_msob6"]
 [ext_resource type="Texture2D" uid="uid://c0rd5gb8h6jbh" path="res://Assets/Images/PokerTable.png" id="4_hu6rv"]
 [ext_resource type="PackedScene" uid="uid://bbt3x8ytel0qp" path="res://Components/UIComponent.tscn" id="4_y574w"]
 [ext_resource type="PackedScene" uid="uid://ict2dr1q6yv8" path="res://Components/PixelationTransitionComponent.tscn" id="5_n3kel"]
 [ext_resource type="PackedScene" uid="uid://dcx3grdchm1hd" path="res://Components/ObjectiveComponent.tscn" id="7_ma7lq"]
 [ext_resource type="AudioStream" uid="uid://bxr1d1nmjuda6" path="res://Assets/Audio/jazz2_casino.mp3" id="9_0e5ph"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueResource.gd" id="11_naumy"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueEntry.gd" id="12_37agm"]
 
-[node name="StatisticsCardGame" type="Node2D" node_paths=PackedStringArray("gb", "hand", "audio", "obj", "objective", "game_ui", "mascot", "camera")]
+[sub_resource type="Resource" id="Resource_i5w1q"]
+resource_name = "DefaultName"
+script = ExtResource("12_37agm")
+id = 0
+dialogue = "Hello, welcome to card game!"
+location = Vector2(0, 0)
+duration = 0.7
+mood = "Wave"
+
+[sub_resource type="Resource" id="Resource_7hluq"]
+resource_name = "DefaultName"
+script = ExtResource("12_37agm")
+id = 0
+dialogue = "Hello"
+location = Vector2(0, 0)
+duration = 1.0
+mood = "Wave"
+
+[node name="StatisticsCardGame" type="Node2D" node_paths=PackedStringArray("gb", "hand", "audio", "obj", "objective", "game_ui", "mascot", "camera", "dialogue")]
 script = ExtResource("1_ebgro")
 gb = NodePath("GameBoard")
 hand = NodePath("GameBoard/Hand")
@@ -23,6 +43,7 @@ objective = NodePath("ObjectiveComponent")
 game_ui = NodePath("GameUI")
 mascot = NodePath("MascotComponent")
 camera = NodePath("CameraComponent")
+dialogue = NodePath("Dialogue")
 
 [node name="PokerTable" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -69,3 +90,7 @@ autowrap_mode = 3
 stream = ExtResource("9_0e5ph")
 volume_db = -15.0
 bus = &"Music"
+
+[node name="Dialogue" type="Node2D" parent="."]
+script = ExtResource("11_naumy")
+custom_res = Array[Resource]([SubResource("Resource_i5w1q"), SubResource("Resource_7hluq")])

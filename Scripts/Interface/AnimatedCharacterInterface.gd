@@ -66,7 +66,7 @@ func teleport_to(node: Node2D, pos: Vector2) -> Vector2: # IMPLEMENTED
 
 # Dialogue Functions
 @warning_ignore("unused_parameter")
-func speak(dialogue: String, speech_bank_idx: int = -1) -> void:
+func speak(dialogue: String, speech_bank_idx: int = -1, manual_dialogue: DialogueComponent = null) -> void:
 	push_error("speak() must be implemented by subclass.")
 	pass  # speech bank idx is in the case the character does have a speech component
 @warning_ignore("unused_parameter")

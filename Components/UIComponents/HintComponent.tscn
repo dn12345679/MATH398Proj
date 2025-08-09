@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bw21ix10kbkc8"]
+[gd_scene load_steps=4 format=3 uid="uid://bw21ix10kbkc8"]
 
 [ext_resource type="Script" path="res://Scripts/HintScript.gd" id="1_5ens5"]
-[ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="2_lvtwd"]
 [ext_resource type="AudioStream" uid="uid://fr11oamq34uj" path="res://Assets/Audio/writing2.mp3" id="3_lj8di"]
 [ext_resource type="Texture2D" uid="uid://5a8oc6fryqc" path="res://Assets/Images/gobutton.png" id="4_4p8bn"]
 
@@ -50,9 +49,6 @@ One of the ways that I find it most helpful is to learn the problem
 autowrap_mode = 3
 visible_characters = 0
 visible_ratio = 0.0
-
-[node name="MascotComponent" parent="." instance=ExtResource("2_lvtwd")]
-position = Vector2(368, 112)
 
 [node name="HintAudio" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-576, -320)

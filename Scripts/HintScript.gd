@@ -1,5 +1,5 @@
 class_name HintComponent
-extends Handler
+extends Control
 
 @export_category("Hint Nodes")
 @export var text_node: Label

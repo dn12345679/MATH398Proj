@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StatResource" load_steps=2 format=3 uid="uid://c00oqe2smp1l3"]
+
+[ext_resource type="Script" path="res://Scenes/Statistics/StatResource.gd" id="1_3ahyv"]
+
+[resource]
+script = ExtResource("1_3ahyv")
+title = ""
+description = ""
+objective_type = ""
+completion_message = ""
+reward_time = 0
+hints = Array[String]([])
+correct_answer = Array[String]([])
+card_draw = Array[Vector2i]([])
+card_count = 0
+replacement = false
+allow_delete_pegs = false
+max_peg_delete = null

@@ -12,6 +12,7 @@ extends Handler
 var curr_level: int = 0 # iterate over levels array
 
 func _ready():
+	super._ready()
 	audio.play()
 	handle_level(levels[curr_level])
 	game_ui.curr_level_resource = levels[curr_level]

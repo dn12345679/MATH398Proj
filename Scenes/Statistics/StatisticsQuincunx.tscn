@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://ddjcfjvwq7uec"]
+[gd_scene load_steps=21 format=3 uid="uid://ddjcfjvwq7uec"]
 
 [ext_resource type="Script" path="res://Scripts/LevelHandlers/StatisticsQuincunxHandler.gd" id="1_8pabp"]
 [ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="1_l3e3o"]
 [ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="2_bwrmu"]
+[ext_resource type="Resource" uid="uid://d2xeihrnksef0" path="res://Resources/Stat1_Quincunx.tres" id="2_ri6xd"]
 [ext_resource type="Texture2D" uid="uid://ca4doob4seidf" path="res://Assets/Images/checkered_background.png" id="3_8rtlb"]
 [ext_resource type="PackedScene" uid="uid://ict2dr1q6yv8" path="res://Components/PixelationTransitionComponent.tscn" id="3_h1iwf"]
 [ext_resource type="PackedScene" uid="uid://dcx3grdchm1hd" path="res://Components/ObjectiveComponent.tscn" id="4_mhuwf"]
@@ -11,19 +12,55 @@
 [ext_resource type="PackedScene" uid="uid://ca3grmv65umbt" path="res://Components/QuincunxBall2D.tscn" id="8_1xq8s"]
 [ext_resource type="Texture2D" uid="uid://cb0cy4nxqwuyi" path="res://Assets/Images/quincunx_bar.png" id="9_h1rur"]
 [ext_resource type="PackedScene" uid="uid://7wejgylivpdc" path="res://Components/DistributionChart.tscn" id="11_u2x0b"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueResource.gd" id="12_h204k"]
+[ext_resource type="AudioStream" uid="uid://d0gblvcqslaeo" path="res://Assets/Audio/water_drop.mp3" id="13_bs8kl"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueEntry.gd" id="13_nxicb"]
+[ext_resource type="AudioStream" uid="uid://cokrehgsn2wyf" path="res://Assets/Audio/bossa_jazz.mp3" id="15_aoww0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0snp0"]
 size = Vector2(573, 52)
 
-[node name="StatisticsQuincunx" type="Node2D" node_paths=PackedStringArray("spawn_handler", "chart", "objective", "game_ui", "mascot", "camera")]
+[sub_resource type="Resource" id="Resource_hbysm"]
+resource_name = "DefaultName"
+script = ExtResource("13_nxicb")
+id = 0
+dialogue = "Hello, Welcome to Quincunx!"
+location = Vector2(184, -24)
+duration = 1.0
+mood = "Wave"
+
+[sub_resource type="Resource" id="Resource_v4hv5"]
+resource_name = "DefaultName"
+script = ExtResource("13_nxicb")
+id = 0
+dialogue = "In this game, you will learn ab out the Normal Distribution! "
+location = Vector2(184, -24)
+duration = 0.6
+mood = "Speaking"
+
+[sub_resource type="Resource" id="Resource_jjx13"]
+resource_name = "DefaultName"
+script = ExtResource("13_nxicb")
+id = 1
+dialogue = "Read the Objective, and press Answer when ready!"
+location = Vector2(-179, 24)
+duration = 0.4
+mood = "Correct"
+
+[node name="StatisticsQuincunx" type="Node2D" node_paths=PackedStringArray("spawn_handler", "chart", "audio", "b_counter", "obj", "objective", "game_ui", "mascot", "camera", "dialogue")]
 script = ExtResource("1_8pabp")
 spawn_handler = NodePath("SpawnBallNode")
 chart = NodePath("DistributionChart")
+audio = NodePath("AudioStreamPlayer2D")
+b_counter = NodePath("BallCounter")
+obj = NodePath("ObjectiveLabel")
+levels = Array[Resource("res://Scenes/Statistics/StatResource.gd")]([ExtResource("2_ri6xd")])
 quincunx_ball = ExtResource("8_1xq8s")
 objective = NodePath("ObjectiveComponent")
 game_ui = NodePath("GameUI")
 mascot = NodePath("MascotComponent")
 camera = NodePath("CameraComponent")
+dialogue = NodePath("Dialogue")
 
 [node name="CheckeredBackground" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.564706)
@@ -32,10 +69,13 @@ position = Vector2(2, -1.19209e-07)
 scale = Vector2(16.1, 16.1)
 texture = ExtResource("3_8rtlb")
 
+[node name="DistributionChart" parent="." instance=ExtResource("11_u2x0b")]
+graph_position = Vector2(-212, 96)
+
 [node name="CameraComponent" parent="." instance=ExtResource("1_l3e3o")]
 
 [node name="MascotComponent" parent="." instance=ExtResource("2_bwrmu")]
-position = Vector2(-179, -24)
+position = Vector2(184, -24)
 
 [node name="Pixelation" parent="." instance=ExtResource("3_h1iwf")]
 visible = false
@@ -48,8 +88,6 @@ position = Vector2(8, -40)
 [node name="GameUI" parent="." instance=ExtResource("5_enakr")]
 metadata/_edit_lock_ = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-
 [node name="Quincunx2D" parent="." instance=ExtResource("7_tcwbj")]
 
 [node name="SpawnBallNode" type="Control" parent="."]
@@ -59,7 +97,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="QuincunxSpawn" type="Node2D" parent="SpawnBallNode"]
-position = Vector2(3, -140)
+position = Vector2(4, -140)
 
 [node name="SpawnBall" type="TextureButton" parent="SpawnBallNode"]
 texture_filter = 3
@@ -89,7 +127,28 @@ collision_mask = 2
 position = Vector2(276.5, 16)
 shape = SubResource("RectangleShape2D_0snp0")
 
-[node name="DistributionChart" parent="." instance=ExtResource("11_u2x0b")]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="BallCounter"]
+stream = ExtResource("13_bs8kl")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="Dialogue" type="Node2D" parent="."]
+script = ExtResource("12_h204k")
+custom_res = Array[Resource]([SubResource("Resource_hbysm"), SubResource("Resource_v4hv5"), SubResource("Resource_jjx13")])
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_aoww0")
+volume_db = -25.0
+bus = &"Music"
+
+[node name="ObjectiveLabel" type="Label" parent="."]
+offset_left = -248.0
+offset_top = 48.0
+offset_right = -144.0
+offset_bottom = 136.0
+theme_override_font_sizes/font_size = 10
+text = "Example Text"
+autowrap_mode = 3
 
 [connection signal="pressed" from="SpawnBallNode/SpawnBall" to="." method="_on_spawn_ball_pressed"]
 [connection signal="body_entered" from="BallCounter" to="." method="_on_ball_counter_body_entered"]
