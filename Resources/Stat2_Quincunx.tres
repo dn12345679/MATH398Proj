@@ -4,15 +4,15 @@
 
 [resource]
 script = ExtResource("1_3ahyv")
-title = ""
-description = ""
-objective_type = ""
-completion_message = ""
+title = "Skewed Distribution"
+description = "A skewed distribution happens when the graph is no longer symmetrical. Observe what happens when you remove pegs"
+objective_type = "Delete 1 peg and observe the graph. What happens?"
+completion_message = "A left-skew happens when the data appears to be more focused on the left side"
 reward_time = 0
-hints = Array[String]([])
+hints = Array[String](["This is open-ended! Delete a peg like the first one in the 2nd row, then run the simulation", "This is open-ended! Delete a peg like the first one in the 2nd row, then run the simulation"])
 correct_answer = Array[String]([])
 card_draw = Array[Vector2i]([])
 card_count = 0
 replacement = false
-allow_delete_pegs = false
-max_peg_delete = null
+allow_delete_pegs = true
+max_peg_delete = 1

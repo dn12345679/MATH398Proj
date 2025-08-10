@@ -12,19 +12,22 @@ signal answer_incorrect(answer)
 
 
 	
-
+## NOTE: All logic for handling correct or incorrect answers
+	## is stored inside of UIComponent.gd
 func check_answer():
 	var ans2str: String = str(answer_box.text).strip_edges()
 	if len(curr_level_resource.correct_answer) == 0 or  ans2str in curr_level_resource.correct_answer:
+		get_tree().paused = false
 		answer_correct.emit(ans2str)
 	else:
 		answer_incorrect.emit(ans2str)
-	close()
+		close()
 	
 
 
 
 func _on_submit_pressed():
+	print("yeah")
 	check_answer()
 func _on_back_pressed():
 	

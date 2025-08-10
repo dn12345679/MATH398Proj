@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://ddjcfjvwq7uec"]
+[gd_scene load_steps=23 format=3 uid="uid://ddjcfjvwq7uec"]
 
 [ext_resource type="Script" path="res://Scripts/LevelHandlers/StatisticsQuincunxHandler.gd" id="1_8pabp"]
 [ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="1_l3e3o"]
 [ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="2_bwrmu"]
 [ext_resource type="Resource" uid="uid://d2xeihrnksef0" path="res://Resources/Stat1_Quincunx.tres" id="2_ri6xd"]
 [ext_resource type="Texture2D" uid="uid://ca4doob4seidf" path="res://Assets/Images/checkered_background.png" id="3_8rtlb"]
+[ext_resource type="Resource" uid="uid://c00oqe2smp1l3" path="res://Resources/Stat2_Quincunx.tres" id="3_ehuxw"]
 [ext_resource type="PackedScene" uid="uid://ict2dr1q6yv8" path="res://Components/PixelationTransitionComponent.tscn" id="3_h1iwf"]
 [ext_resource type="PackedScene" uid="uid://dcx3grdchm1hd" path="res://Components/ObjectiveComponent.tscn" id="4_mhuwf"]
 [ext_resource type="PackedScene" uid="uid://bbt3x8ytel0qp" path="res://Components/UIComponent.tscn" id="5_enakr"]
@@ -23,6 +24,7 @@ size = Vector2(573, 52)
 [sub_resource type="Resource" id="Resource_hbysm"]
 resource_name = "DefaultName"
 script = ExtResource("13_nxicb")
+level = 0
 id = 0
 dialogue = "Hello, Welcome to Quincunx!"
 location = Vector2(184, -24)
@@ -32,6 +34,7 @@ mood = "Wave"
 [sub_resource type="Resource" id="Resource_v4hv5"]
 resource_name = "DefaultName"
 script = ExtResource("13_nxicb")
+level = 0
 id = 0
 dialogue = "In this game, you will learn ab out the Normal Distribution! "
 location = Vector2(184, -24)
@@ -41,20 +44,32 @@ mood = "Speaking"
 [sub_resource type="Resource" id="Resource_jjx13"]
 resource_name = "DefaultName"
 script = ExtResource("13_nxicb")
+level = 0
 id = 1
 dialogue = "Read the Objective, and press Answer when ready!"
 location = Vector2(-179, 24)
 duration = 0.4
 mood = "Correct"
 
-[node name="StatisticsQuincunx" type="Node2D" node_paths=PackedStringArray("spawn_handler", "chart", "audio", "b_counter", "obj", "objective", "game_ui", "mascot", "camera", "dialogue")]
+[sub_resource type="Resource" id="Resource_r0nnl"]
+resource_name = "DefaultName"
+script = ExtResource("13_nxicb")
+level = 1
+id = 0
+dialogue = "In this activity, we will be looking at skewed distributions"
+location = Vector2(184, 79)
+duration = 1.0
+mood = "Speaking"
+
+[node name="StatisticsQuincunx" type="Node2D" node_paths=PackedStringArray("spawn_handler", "quincunx", "chart", "audio", "b_counter", "obj", "objective", "game_ui", "mascot", "camera", "dialogue")]
 script = ExtResource("1_8pabp")
 spawn_handler = NodePath("SpawnBallNode")
+quincunx = NodePath("Quincunx2D")
 chart = NodePath("DistributionChart")
 audio = NodePath("AudioStreamPlayer2D")
 b_counter = NodePath("BallCounter")
 obj = NodePath("ObjectiveLabel")
-levels = Array[Resource("res://Scenes/Statistics/StatResource.gd")]([ExtResource("2_ri6xd")])
+levels = Array[Resource("res://Scenes/Statistics/StatResource.gd")]([ExtResource("2_ri6xd"), ExtResource("3_ehuxw")])
 quincunx_ball = ExtResource("8_1xq8s")
 objective = NodePath("ObjectiveComponent")
 game_ui = NodePath("GameUI")
@@ -134,7 +149,7 @@ bus = &"SFX"
 
 [node name="Dialogue" type="Node2D" parent="."]
 script = ExtResource("12_h204k")
-custom_res = Array[Resource]([SubResource("Resource_hbysm"), SubResource("Resource_v4hv5"), SubResource("Resource_jjx13")])
+custom_res = Array[Resource]([SubResource("Resource_hbysm"), SubResource("Resource_v4hv5"), SubResource("Resource_jjx13"), SubResource("Resource_r0nnl")])
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_aoww0")

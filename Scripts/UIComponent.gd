@@ -38,9 +38,11 @@ var current_hint: int = 0
 
 func _ready():
 	answer.answer_incorrect.connect(signal_incorrect)
+	answer.answer_correct.connect(signal_correct)
 
-
-
+func signal_correct(ans):
+	Global.curr_level_idx += 1
+	get_tree().reload_current_scene()
 
 # this is out of place, but it just makes the Mascot react to incorrect answers
 func signal_incorrect(ans):

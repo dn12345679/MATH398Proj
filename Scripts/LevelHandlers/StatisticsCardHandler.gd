@@ -9,13 +9,13 @@ extends Handler
 @export var obj: Label
 
 @export var levels: Array[StatResource] # store level data
-var curr_level: int = 0 # iterate over levels array
 
 func _ready():
 	super._ready()
 	audio.play()
-	handle_level(levels[curr_level])
-	game_ui.curr_level_resource = levels[curr_level]
+	if Global.curr_level_idx < Global.max_level_idx:
+		handle_level(levels[Global.curr_level_idx])
+		game_ui.curr_level_resource = levels[Global.curr_level_idx]
 
 ## handles card drawing, setting scene, etc
 func handle_level(res: StatResource):

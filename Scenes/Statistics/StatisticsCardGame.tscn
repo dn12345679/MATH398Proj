@@ -16,6 +16,7 @@
 [sub_resource type="Resource" id="Resource_i5w1q"]
 resource_name = "DefaultName"
 script = ExtResource("12_37agm")
+level = 0
 id = 0
 dialogue = "Hello, welcome to card game!"
 location = Vector2(0, 0)
@@ -25,6 +26,7 @@ mood = "Wave"
 [sub_resource type="Resource" id="Resource_7hluq"]
 resource_name = "DefaultName"
 script = ExtResource("12_37agm")
+level = 0
 id = 0
 dialogue = "Hello"
 location = Vector2(0, 0)

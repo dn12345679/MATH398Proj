@@ -9,6 +9,7 @@ extends Node2D
 @export var radius: float = 6.0
 @export var initial_peg_center: Vector2 = Vector2.ZERO
 @export var can_delete_pegs: bool = false
+@export var max_delete_pegs: int = 0
 
 @onready var peg_img = preload("res://Assets/Images/quincunx_peg.png")
 @onready var ball_img = preload("res://Assets/Images/quincunx_ball.png")
@@ -63,7 +64,8 @@ func create_peg(pos: Vector2):
 		)
 
 func _on_peg_clicked(event, child):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and max_delete_pegs > 0:
+		max_delete_pegs -= 1
 		child.queue_free()
 
 func include_sidebar(left_or_right: int):

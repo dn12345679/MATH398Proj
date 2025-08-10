@@ -54,7 +54,7 @@ func dialogue_bank(node: AnimatedCharacterInterface) -> Array[DialogueComponent]
 		# after that, remove its index to reduce iteration count (optimization)
 	for e in range(len(dialogue.custom_res)):
 		var d_e: DialogueEntry = dialogue.custom_res[e]
-		if d_e.id == speech_stage:
+		if d_e.id == speech_stage and d_e.level == Global.curr_level_idx:
 			node.move_to(node, d_e.location, 1.0)
 			text_arr.append(d_e)
 

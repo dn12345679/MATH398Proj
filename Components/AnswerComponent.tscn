@@ -60,12 +60,13 @@ wrap_mode = 1
 autowrap_mode = 2
 
 [node name="Submit" type="TextureButton" parent="."]
+process_mode = 3
 texture_filter = 3
 layout_mode = 0
-offset_left = 768.0
-offset_top = 352.0
-offset_right = 800.0
-offset_bottom = 384.0
+offset_left = 736.0
+offset_top = 424.0
+offset_right = 768.0
+offset_bottom = 456.0
 scale = Vector2(3, 3)
 texture_normal = ExtResource("2_7u1cc")
 
