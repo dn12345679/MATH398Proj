@@ -1,0 +1,84 @@
+[gd_scene load_steps=18 format=3 uid="uid://b348iqvbya1c1"]
+
+[ext_resource type="Script" path="res://Scripts/JosephusComponent.gd" id="1_m5kcj"]
+[ext_resource type="Script" path="res://Scripts/LevelHandlers/StatisticsDaggerHandler.gd" id="1_qdfdi"]
+[ext_resource type="Resource" uid="uid://b2exx71qeca5v" path="res://Resources/Stat1_Dagger.tres" id="2_4v0d7"]
+[ext_resource type="Texture2D" uid="uid://cl8m31p5rf068" path="res://Assets/Images/Seat.png" id="2_u743d"]
+[ext_resource type="Resource" uid="uid://bof6ivc5auu6b" path="res://Resources/Stat2_Dagger.tres" id="3_og5sr"]
+[ext_resource type="Resource" uid="uid://drl5ui8t44dx7" path="res://Resources/Stat3_Dagger.tres" id="4_crthj"]
+[ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="4_pxwrb"]
+[ext_resource type="Texture2D" uid="uid://blpuqx134fd65" path="res://Assets/Images/icon_mascot.png" id="4_qsj5w"]
+[ext_resource type="PackedScene" uid="uid://dcx3grdchm1hd" path="res://Components/ObjectiveComponent.tscn" id="5_v7hb7"]
+[ext_resource type="Texture2D" uid="uid://bmrxj3tlphydg" path="res://Assets/Images/knife.png" id="5_yclwy"]
+[ext_resource type="PackedScene" uid="uid://bbt3x8ytel0qp" path="res://Components/UIComponent.tscn" id="6_6dcb7"]
+[ext_resource type="AudioStream" uid="uid://c6bpoj33xa8s0" path="res://Assets/Audio/ui-flip.mp3" id="6_mkkq3"]
+[ext_resource type="AudioStream" uid="uid://w7o78kqtctqx" path="res://Assets/Audio/sharp_blade1.mp3" id="7_b464d"]
+[ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="7_biwbe"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueResource.gd" id="8_50s88"]
+[ext_resource type="AudioStream" uid="uid://dh716n1qhbi4s" path="res://Assets/Audio/jazz_vlog.mp3" id="11_r8q7q"]
+[ext_resource type="PackedScene" uid="uid://cqoljpuhth2pq" path="res://Components/UIComponents/MenuButton.tscn" id="17_7846t"]
+
+[node name="StatisticsDagger" type="Node2D" node_paths=PackedStringArray("audio", "obj", "josephus_obj", "objective", "game_ui", "mascot", "camera", "dialogue")]
+script = ExtResource("1_qdfdi")
+audio = NodePath("AudioStreamPlayer2D")
+obj = NodePath("ObjectiveLabel")
+levels = Array[Resource("res://Scenes/Statistics/StatResource.gd")]([ExtResource("2_4v0d7"), ExtResource("3_og5sr"), ExtResource("4_crthj")])
+josephus_obj = NodePath("JosephusSetup")
+objective = NodePath("ObjectiveComponent")
+game_ui = NodePath("GameUI")
+mascot = NodePath("MascotComponent")
+camera = NodePath("CameraComponent")
+dialogue = NodePath("Dialogue")
+
+[node name="BG" type="ColorRect" parent="."]
+offset_left = -760.0
+offset_top = -440.0
+offset_right = 920.0
+offset_bottom = 528.0
+color = Color(0.556993, 0.58, 0.3828, 0.54902)
+metadata/_edit_lock_ = true
+
+[node name="JosephusSetup" type="Node2D" parent="." node_paths=PackedStringArray("audio")]
+script = ExtResource("1_m5kcj")
+audio = NodePath("JosephusAudio")
+chair_texture = ExtResource("2_u743d")
+contestant_texture = ExtResource("4_qsj5w")
+dagger_texture = ExtResource("5_yclwy")
+dagger_move_audio = ExtResource("6_mkkq3")
+dagger_cut_audio = ExtResource("7_b464d")
+
+[node name="JosephusAudio" type="AudioStreamPlayer2D" parent="JosephusSetup"]
+stream = ExtResource("6_mkkq3")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="CameraComponent" parent="." instance=ExtResource("4_pxwrb")]
+zoom_amount = 1.5
+
+[node name="GameUI" parent="." instance=ExtResource("6_6dcb7")]
+scale = Vector2(0.7, 0.7)
+
+[node name="MascotComponent" parent="." instance=ExtResource("7_biwbe")]
+position = Vector2(288, 56)
+
+[node name="ObjectiveComponent" parent="." instance=ExtResource("5_v7hb7")]
+
+[node name="Dialogue" type="Node2D" parent="."]
+script = ExtResource("8_50s88")
+
+[node name="ObjectiveLabel" type="Label" parent="."]
+texture_filter = 3
+offset_left = -368.0
+offset_top = -112.0
+offset_right = -200.0
+offset_bottom = 120.0
+text = "Objective: "
+autowrap_mode = 3
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_r8q7q")
+volume_db = -20.0
+bus = &"Music"
+
+[node name="MenuButton" parent="." instance=ExtResource("17_7846t")]
+position = Vector2(304, 144)

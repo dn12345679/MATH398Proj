@@ -17,10 +17,10 @@ func _ready():
 	super._ready()
 	audio.play()
 	
-	if Global.curr_level_idx < Global.max_level_idx:
+	if Global.curr_level_idx < Global.max_level_idx and Global.curr_level_idx < len(levels):
 		handle_level(levels[Global.curr_level_idx])
 		game_ui.curr_level_resource = levels[Global.curr_level_idx]
-
+	
 
 
 ## handles card drawing, setting scene, etc
@@ -30,10 +30,13 @@ func handle_level(res: StatResource):
 	objective.update_text(res.description)
 	quincunx.can_delete_pegs = res.allow_delete_pegs
 	quincunx.max_delete_pegs = res.max_peg_delete
+	quincunx.initialize_pegs(quincunx.spacing, quincunx.layers)
 
 # spawn a quincunx
 func _on_spawn_ball_pressed():
-	var ball: QuincunxBall2D = quincunx_ball.instantiate()
+	var ball: QuincunxBall2D = quincunx_ball.instantiate() as QuincunxBall2D
+	ball.initial_position_distribution = levels[Global.curr_level_idx].distribution
+	ball.initial_offset = levels[Global.curr_level_idx].initial_distance
 	spawn_handler.get_node("QuincunxSpawn").call_deferred("add_child", ball)
 
 

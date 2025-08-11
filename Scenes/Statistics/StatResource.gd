@@ -19,4 +19,11 @@ var rand: Vector2i = Vector2i(-1, -1) # to fill with randoms
 @export_category("Quincunx Game")
 @export var allow_delete_pegs: bool = false
 @export var max_peg_delete: int = int(allow_delete_pegs)
+@export var distribution: Array[int] = [-1, 1] # left or right 50/50
+@export var initial_distance: float = 0
 
+@export_category("Josephus Game")
+@export var number_chairs: int = 16
+@export var number_contestants: int = 4
+@export var distance_from_center: float = 32.0 
+@export var colors: Array[Color] = []

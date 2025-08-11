@@ -16,6 +16,12 @@ var dialogue_scene: PackedScene = preload("res://Components/DialogueComponent.ts
 @export var dialogue: DialogueResource ## Important
 
 
+func handle_all_levels_complete() -> void:
+	get_tree().paused = false
+	await get_tree().process_frame
+	Global.curr_level_idx = 0
+	get_tree().change_scene_to_file("res://Scenes/Main.tscn")
+
 func _ready():
 	if !objective || !game_ui || !mascot || !camera || !dialogue:
 		print("Missing game component")

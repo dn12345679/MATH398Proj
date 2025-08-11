@@ -8,6 +8,7 @@ extends Node2D
 @export var spacing: float = 32.0 # default 32 pixels apart
 @export var radius: float = 6.0
 @export var initial_peg_center: Vector2 = Vector2.ZERO
+
 @export var can_delete_pegs: bool = false
 @export var max_delete_pegs: int = 0
 
@@ -15,10 +16,16 @@ extends Node2D
 @onready var ball_img = preload("res://Assets/Images/quincunx_ball.png")
 @onready var sidebar_img = preload("res://Assets/Images/quincunx_bar.png")
 
+@export var level_res: StatResource
+
+# originally, I wanted to initialize the pegs on ready
+	# but i had logic that required this to be from main. Check HANDLER
 func _ready():
-	initialize_pegs(spacing, layers)
+	#initialize_pegs(spacing, layers)
 	#include_sidebar(1)
 	#include_sidebar(-1)
+	
+	pass
 
 func initialize_pegs(px_spacing: float, px_layers: int):
 	var offset: Vector2 = initial_peg_center # set peg 1
@@ -59,6 +66,7 @@ func create_peg(pos: Vector2):
 	
 	# only do this if pegs are allowed to be deleted for this activity
 	if can_delete_pegs:
+		
 		peg_holder.connect(
 			"gui_input", Callable(self, "_on_peg_clicked").bind(peg_holder)
 		)

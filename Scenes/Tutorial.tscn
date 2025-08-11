@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://brvgx4toir5sa"]
+[gd_scene load_steps=28 format=3 uid="uid://brvgx4toir5sa"]
 
 [ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="1_lb7nh"]
 [ext_resource type="Script" path="res://Scripts/LevelHandlers/TutorialHandler.gd" id="1_xvxu3"]
 [ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="2_tx68x"]
+[ext_resource type="Resource" uid="uid://cvfnswhiltte1" path="res://Resources/TutorialResource.tres" id="2_udgko"]
 [ext_resource type="Texture2D" uid="uid://88700bnnc808" path="res://Assets/Images/blackboard.png" id="2_xw8ba"]
 [ext_resource type="PackedScene" uid="uid://bbt3x8ytel0qp" path="res://Components/UIComponent.tscn" id="5_oivqj"]
 [ext_resource type="AudioStream" uid="uid://d4h1pbic5jc51" path="res://Assets/Audio/jazz.mp3" id="6_gtcnd"]
@@ -10,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ict2dr1q6yv8" path="res://Components/PixelationTransitionComponent.tscn" id="8_ee33w"]
 [ext_resource type="Script" path="res://Scripts/Dialogue/DialogueResource.gd" id="9_fms8m"]
 [ext_resource type="Script" path="res://Scripts/Dialogue/DialogueEntry.gd" id="10_ir8np"]
+[ext_resource type="PackedScene" uid="uid://dcx3grdchm1hd" path="res://Components/ObjectiveComponent.tscn" id="11_djq2o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0b554"]
 atlas = ExtResource("7_4cyau")
@@ -18,6 +20,7 @@ region = Rect2(0, 0, 48, 32)
 [sub_resource type="Resource" id="Resource_ak0i8"]
 resource_name = "custom initial name"
 script = ExtResource("10_ir8np")
+level = 0
 id = 0
 dialogue = "Hello, welcome to the tutorial!"
 location = Vector2(0, 0)
@@ -27,6 +30,7 @@ mood = "Wave"
 [sub_resource type="Resource" id="Resource_hwiof"]
 resource_name = "DefaultName"
 script = ExtResource("10_ir8np")
+level = 0
 id = 0
 dialogue = "In this tutorial I will show you"
 location = Vector2(0, 0)
@@ -36,6 +40,7 @@ mood = "Speaking"
 [sub_resource type="Resource" id="Resource_gmci8"]
 resource_name = "DefaultName"
 script = ExtResource("10_ir8np")
+level = 0
 id = 0
 dialogue = "How to interact with my teaching tool!"
 location = Vector2(0, 0)
@@ -45,6 +50,7 @@ mood = "Speaking"
 [sub_resource type="Resource" id="Resource_wru57"]
 resource_name = "DefaultName"
 script = ExtResource("10_ir8np")
+level = 0
 id = 1
 dialogue = "Over here is the game buttons"
 location = Vector2(-91, 84)
@@ -54,6 +60,7 @@ mood = "Question"
 [sub_resource type="Resource" id="Resource_ijj8u"]
 resource_name = "DefaultName"
 script = ExtResource("10_ir8np")
+level = 0
 id = 1
 dialogue = "This first one is for accessing settings, like volume!"
 location = Vector2(-91, 84)
@@ -63,6 +70,7 @@ mood = "Speaking"
 [sub_resource type="Resource" id="Resource_3nrj3"]
 resource_name = "DefaultName"
 script = ExtResource("10_ir8np")
+level = 0
 id = 1
 dialogue = "The one on the right is for hints, to get help!"
 location = Vector2(-91, 84)
@@ -72,6 +80,7 @@ mood = "Thinking"
 [sub_resource type="Resource" id="Resource_n3ymg"]
 resource_name = "DefaultName"
 script = ExtResource("10_ir8np")
+level = 0
 id = 1
 dialogue = "The BIG middle one is to answer the question!"
 location = Vector2(-91, 84)
@@ -81,6 +90,7 @@ mood = "Correct"
 [sub_resource type="Resource" id="Resource_qit35"]
 resource_name = "DefaultName"
 script = ExtResource("10_ir8np")
+level = 0
 id = 1
 dialogue = "The bar chart shows your stats if you are curious"
 location = Vector2(-91, 84)
@@ -90,6 +100,7 @@ mood = "Speaking"
 [sub_resource type="Resource" id="Resource_kcxsg"]
 resource_name = "DefaultName"
 script = ExtResource("10_ir8np")
+level = 0
 id = 1
 dialogue = "And the last one is if you ever want to restart the level!"
 location = Vector2(-91, 84)
@@ -99,6 +110,7 @@ mood = "Time"
 [sub_resource type="Resource" id="Resource_fck0n"]
 resource_name = "DefaultName"
 script = ExtResource("10_ir8np")
+level = 0
 id = 2
 dialogue = "Up here are the timer and the hint counter"
 location = Vector2(122, -80)
@@ -108,6 +120,7 @@ mood = "Thinking"
 [sub_resource type="Resource" id="Resource_f3uqy"]
 resource_name = "DefaultName"
 script = ExtResource("10_ir8np")
+level = 0
 id = 2
 dialogue = "When you get an answer incorrect, you lose a hint, but..."
 location = Vector2(122, -80)
@@ -117,6 +130,7 @@ mood = "Incorrect"
 [sub_resource type="Resource" id="Resource_2r84t"]
 resource_name = "DefaultName"
 script = ExtResource("10_ir8np")
+level = 0
 id = 2
 dialogue = "... Keep going! There is no penalty aside from losing hints."
 location = Vector2(122, -80)
@@ -126,6 +140,7 @@ mood = "Correct"
 [sub_resource type="Resource" id="Resource_8m7iq"]
 resource_name = "DefaultName"
 script = ExtResource("10_ir8np")
+level = 0
 id = 2
 dialogue = "The timer will be used to calculate your final score!"
 location = Vector2(122, -80)
@@ -135,14 +150,20 @@ mood = "Time"
 [sub_resource type="Resource" id="Resource_liy4h"]
 resource_name = "DefaultName"
 script = ExtResource("10_ir8np")
+level = 0
 id = 3
 dialogue = "That's all for the tutorial! Exit to the menu and choose a topic!"
 location = Vector2(0, 0)
 duration = 1.0
 mood = "Wave"
 
-[node name="Tutorial" type="Node2D" node_paths=PackedStringArray("dialogue")]
+[node name="Tutorial" type="Node2D" node_paths=PackedStringArray("objective", "game_ui", "mascot", "camera", "dialogue")]
 script = ExtResource("1_xvxu3")
+levels = Array[Resource]([ExtResource("2_udgko")])
+objective = NodePath("ObjectiveComponent")
+game_ui = NodePath("GameUI")
+mascot = NodePath("MascotComponent")
+camera = NodePath("CameraComponent")
 dialogue = NodePath("DialogueNode")
 
 [node name="Blackboard" type="Sprite2D" parent="."]
@@ -180,5 +201,8 @@ visible = false
 [node name="DialogueNode" type="Node2D" parent="."]
 script = ExtResource("9_fms8m")
 custom_res = Array[Resource]([SubResource("Resource_ak0i8"), SubResource("Resource_hwiof"), SubResource("Resource_gmci8"), SubResource("Resource_wru57"), SubResource("Resource_ijj8u"), SubResource("Resource_3nrj3"), SubResource("Resource_n3ymg"), SubResource("Resource_qit35"), SubResource("Resource_kcxsg"), SubResource("Resource_fck0n"), SubResource("Resource_f3uqy"), SubResource("Resource_2r84t"), SubResource("Resource_8m7iq"), SubResource("Resource_liy4h")])
+
+[node name="ObjectiveComponent" parent="." instance=ExtResource("11_djq2o")]
+text = "Hello"
 
 [connection signal="pressed" from="ToMenu" to="." method="_on_to_menu_pressed"]

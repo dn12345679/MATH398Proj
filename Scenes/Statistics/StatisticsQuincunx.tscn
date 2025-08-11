@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ddjcfjvwq7uec"]
+[gd_scene load_steps=25 format=3 uid="uid://ddjcfjvwq7uec"]
 
 [ext_resource type="Script" path="res://Scripts/LevelHandlers/StatisticsQuincunxHandler.gd" id="1_8pabp"]
 [ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="1_l3e3o"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://c00oqe2smp1l3" path="res://Resources/Stat2_Quincunx.tres" id="3_ehuxw"]
 [ext_resource type="PackedScene" uid="uid://ict2dr1q6yv8" path="res://Components/PixelationTransitionComponent.tscn" id="3_h1iwf"]
 [ext_resource type="PackedScene" uid="uid://dcx3grdchm1hd" path="res://Components/ObjectiveComponent.tscn" id="4_mhuwf"]
+[ext_resource type="Resource" uid="uid://ite437xga6a1" path="res://Resources/Stat3_Quincunx.tres" id="4_uh4f0"]
 [ext_resource type="PackedScene" uid="uid://bbt3x8ytel0qp" path="res://Components/UIComponent.tscn" id="5_enakr"]
 [ext_resource type="PackedScene" uid="uid://b4ovib41ojf05" path="res://Components/Quincunx2D.tscn" id="7_tcwbj"]
 [ext_resource type="PackedScene" uid="uid://ca3grmv65umbt" path="res://Components/QuincunxBall2D.tscn" id="8_1xq8s"]
@@ -17,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://d0gblvcqslaeo" path="res://Assets/Audio/water_drop.mp3" id="13_bs8kl"]
 [ext_resource type="Script" path="res://Scripts/Dialogue/DialogueEntry.gd" id="13_nxicb"]
 [ext_resource type="AudioStream" uid="uid://cokrehgsn2wyf" path="res://Assets/Audio/bossa_jazz.mp3" id="15_aoww0"]
+[ext_resource type="PackedScene" uid="uid://cqoljpuhth2pq" path="res://Components/UIComponents/MenuButton.tscn" id="19_spahh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0snp0"]
 size = Vector2(573, 52)
@@ -69,7 +71,7 @@ chart = NodePath("DistributionChart")
 audio = NodePath("AudioStreamPlayer2D")
 b_counter = NodePath("BallCounter")
 obj = NodePath("ObjectiveLabel")
-levels = Array[Resource("res://Scenes/Statistics/StatResource.gd")]([ExtResource("2_ri6xd"), ExtResource("3_ehuxw")])
+levels = Array[Resource("res://Scenes/Statistics/StatResource.gd")]([ExtResource("2_ri6xd"), ExtResource("3_ehuxw"), ExtResource("4_uh4f0")])
 quincunx_ball = ExtResource("8_1xq8s")
 objective = NodePath("ObjectiveComponent")
 game_ui = NodePath("GameUI")
@@ -112,7 +114,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="QuincunxSpawn" type="Node2D" parent="SpawnBallNode"]
-position = Vector2(4, -140)
+position = Vector2(4, -141)
 
 [node name="SpawnBall" type="TextureButton" parent="SpawnBallNode"]
 texture_filter = 3
@@ -164,6 +166,9 @@ offset_bottom = 136.0
 theme_override_font_sizes/font_size = 10
 text = "Example Text"
 autowrap_mode = 3
+
+[node name="MenuButton" parent="." instance=ExtResource("19_spahh")]
+position = Vector2(221, 96)
 
 [connection signal="pressed" from="SpawnBallNode/SpawnBall" to="." method="_on_spawn_ball_pressed"]
 [connection signal="body_entered" from="BallCounter" to="." method="_on_ball_counter_body_entered"]

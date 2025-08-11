@@ -1,6 +1,7 @@
 class_name AnswerComponent
 extends Control
 
+# these signals emit to UIComponent
 signal answer_correct(answer)
 signal answer_incorrect(answer)
 
@@ -27,7 +28,6 @@ func check_answer():
 
 
 func _on_submit_pressed():
-	print("yeah")
 	check_answer()
 func _on_back_pressed():
 	

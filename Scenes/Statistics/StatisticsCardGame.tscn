@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://d3vfl5egjmoc8"]
+[gd_scene load_steps=18 format=3 uid="uid://d3vfl5egjmoc8"]
 
 [ext_resource type="Script" path="res://Scripts/LevelHandlers/StatisticsCardHandler.gd" id="1_ebgro"]
 [ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="2_0i0fj"]
 [ext_resource type="PackedScene" uid="uid://bq32anykrvxf7" path="res://Components/StatsCardComponent.tscn" id="2_thh4u"]
 [ext_resource type="Resource" uid="uid://cmypvwyjsdu21" path="res://Resources/Stat1_Card.tres" id="3_mrbhl"]
 [ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="3_msob6"]
+[ext_resource type="Resource" uid="uid://ds4gm465ppxx1" path="res://Resources/Stat2_Card.tres" id="4_eynhu"]
 [ext_resource type="Texture2D" uid="uid://c0rd5gb8h6jbh" path="res://Assets/Images/PokerTable.png" id="4_hu6rv"]
 [ext_resource type="PackedScene" uid="uid://bbt3x8ytel0qp" path="res://Components/UIComponent.tscn" id="4_y574w"]
 [ext_resource type="PackedScene" uid="uid://ict2dr1q6yv8" path="res://Components/PixelationTransitionComponent.tscn" id="5_n3kel"]
@@ -12,26 +13,28 @@
 [ext_resource type="AudioStream" uid="uid://bxr1d1nmjuda6" path="res://Assets/Audio/jazz2_casino.mp3" id="9_0e5ph"]
 [ext_resource type="Script" path="res://Scripts/Dialogue/DialogueResource.gd" id="11_naumy"]
 [ext_resource type="Script" path="res://Scripts/Dialogue/DialogueEntry.gd" id="12_37agm"]
+[ext_resource type="Texture2D" uid="uid://c34dcogcts1ok" path="res://Assets/Images/discard.png" id="13_db7x4"]
+[ext_resource type="PackedScene" uid="uid://cqoljpuhth2pq" path="res://Components/UIComponents/MenuButton.tscn" id="15_lyxjt"]
 
-[sub_resource type="Resource" id="Resource_i5w1q"]
+[sub_resource type="Resource" id="Resource_csd1r"]
 resource_name = "DefaultName"
 script = ExtResource("12_37agm")
 level = 0
 id = 0
-dialogue = "Hello, welcome to card game!"
-location = Vector2(0, 0)
-duration = 0.7
+dialogue = "Hello, Welcome to card game!"
+location = Vector2(-216, 96)
+duration = 0.6
 mood = "Wave"
 
-[sub_resource type="Resource" id="Resource_7hluq"]
+[sub_resource type="Resource" id="Resource_q4tmc"]
 resource_name = "DefaultName"
 script = ExtResource("12_37agm")
 level = 0
 id = 0
-dialogue = "Hello"
-location = Vector2(0, 0)
-duration = 1.0
-mood = "Wave"
+dialogue = "In this game, you will learn about cards and probability"
+location = Vector2(-216, 96)
+duration = 0.6
+mood = "Speaking"
 
 [node name="StatisticsCardGame" type="Node2D" node_paths=PackedStringArray("gb", "hand", "audio", "obj", "objective", "game_ui", "mascot", "camera", "dialogue")]
 script = ExtResource("1_ebgro")
@@ -40,7 +43,7 @@ hand = NodePath("GameBoard/Hand")
 c_scene = ExtResource("2_thh4u")
 audio = NodePath("AudioStreamPlayer2D")
 obj = NodePath("ObjectiveLabel")
-levels = Array[Resource("res://Scenes/Statistics/StatResource.gd")]([ExtResource("3_mrbhl")])
+levels = Array[Resource("res://Scenes/Statistics/StatResource.gd")]([ExtResource("3_mrbhl"), ExtResource("4_eynhu")])
 objective = NodePath("ObjectiveComponent")
 game_ui = NodePath("GameUI")
 mascot = NodePath("MascotComponent")
@@ -62,7 +65,6 @@ offset_top = 48.0
 offset_right = -56.0
 offset_bottom = 88.0
 theme_override_constants/separation = 48
-alignment = 1
 
 [node name="CameraComponent" parent="." instance=ExtResource("2_0i0fj")]
 
@@ -95,4 +97,18 @@ bus = &"Music"
 
 [node name="Dialogue" type="Node2D" parent="."]
 script = ExtResource("11_naumy")
-custom_res = Array[Resource]([SubResource("Resource_i5w1q"), SubResource("Resource_7hluq")])
+custom_res = Array[Resource]([SubResource("Resource_csd1r"), SubResource("Resource_q4tmc")])
+
+[node name="Discard" type="TextureButton" parent="."]
+texture_filter = 3
+offset_left = -240.0
+offset_top = -112.0
+offset_right = -192.0
+offset_bottom = -80.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("13_db7x4")
+
+[node name="MenuButton" parent="." instance=ExtResource("15_lyxjt")]
+position = Vector2(208, 88)
+
+[connection signal="pressed" from="Discard" to="." method="on_discard_pressed"]
