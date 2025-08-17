@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cph45tguu5oxd"]
+
+[ext_resource type="Script" path="res://Scripts/TheorySquare.gd" id="1_mc6hc"]
+[ext_resource type="Texture2D" uid="uid://cb0cy4nxqwuyi" path="res://Assets/Images/quincunx_bar.png" id="2_jnxey"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aa13n"]
+size = Vector2(32, 32)
+
+[node name="TheorySquare" type="RigidBody2D" node_paths=PackedStringArray("click_area", "collider")]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_mc6hc")
+click_area = NodePath("Click")
+collider = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_aa13n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 3
+texture = ExtResource("2_jnxey")
+
+[node name="Click" type="TextureRect" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0

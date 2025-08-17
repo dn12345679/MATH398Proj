@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="TheoryResource" load_steps=2 format=3 uid="uid://ddih5837qaptp"]
+
+[ext_resource type="Script" path="res://Scenes/Theory/TheoryResource.gd" id="1_y72av"]
+
+[resource]
+script = ExtResource("1_y72av")
+title = "Frobenius Coin Problem"
+description = "In this experiment, you will explore how certain values can or cannot be generated from coins of different denominations."
+objective_type = "There are 2 coins, valued 3 and 5. What is the greatest common factor of these 2 numbers? (integer)"
+completion_message = "Correct, 3 and 5 have no common factor outside of 1"
+reward_time = 0
+hints = Array[String](["Hint 1: What integer value is a factor of both 3 and 5?", "Hint 2: 5 and 3 are both primie numbers. What property exists for prime numbers?"])
+correct_answer = Array[String](["1"])
+num_coins = 2
+denominations = Array[int]([3, 5])
+sum_coin_visible = false
+graph_visible = false
+max_points = 6

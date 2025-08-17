@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="TheoryResource" load_steps=2 format=3 uid="uid://cbo3nj4vo8b04"]
+
+[ext_resource type="Script" path="res://Scenes/Theory/TheoryResource.gd" id="1_0r2tr"]
+
+[resource]
+script = ExtResource("1_0r2tr")
+title = ""
+description = "In this activity you will explore more in depth with the coin combination activity"
+objective_type = "List 4 possible sums (Value above both coins) not possible with the 2 coins! Feel free to experiment! "
+completion_message = ""
+reward_time = 0
+hints = Array[String](["Hint 1: Try left and right clicking the coins, experiment with sums. Remember to only include values larger than both of the coins. To start, the lowest possible value larger than both coins not a possible combination is 9!", "Hint 2: In the next section, we will cover the value of the largest impossible sum. For now, assume that the largest possible sum for these 2 coins will not go past x*y - x - y. In other words, the lowest impossible sum greater than both is 9, up to xy - x - y!"])
+correct_answer = Array[String](["9, 10, 13, 17", "9,10,13,17"])
+num_coins = 2
+denominations = Array[int]([4, 7])
+sum_coin_visible = true
+graph_visible = false
+max_points = 6

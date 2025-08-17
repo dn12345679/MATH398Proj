@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="StatResource" load_steps=2 format=3 uid="uid://c00oqe2smp1l3"]
+
+[ext_resource type="Script" path="res://Scenes/Statistics/StatResource.gd" id="1_3ahyv"]
+
+[resource]
+script = ExtResource("1_3ahyv")
+title = "Skewed Distribution"
+description = "A skewed distribution happens when the graph is no longer symmetrical. Observe what happens when you remove pegs"
+objective_type = "Delete 1 peg and observe the graph. What happens?"
+completion_message = "A left-skew happens when the data appears to be more focused on the left side"
+reward_time = 0
+hints = Array[String](["This is open-ended! Delete a peg like the first one in the 2nd row, then run the simulation", "This is open-ended! Delete a peg like the first one in the 2nd row, then run the simulation"])
+correct_answer = Array[String]([])
+card_draw = Array[Vector2i]([])
+card_count = 0
+replacement = false
+allow_delete_pegs = true
+max_peg_delete = 1
+distribution = Array[int]([-1, 1])
+initial_distance = 0.0
+number_chairs = 16
+number_contestants = 4
+distance_from_center = 32.0
+colors = Array[Color]([])

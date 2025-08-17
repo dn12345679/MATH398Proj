@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://d3mis1q8wvht3"]
+
+[ext_resource type="Script" path="res://Scripts/TheoryCoin.gd" id="1_ycuej"]
+[ext_resource type="Texture2D" uid="uid://b4eybogpu7asw" path="res://Assets/Images/Coin.png" id="2_f4ite"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ors2"]
+atlas = ExtResource("2_f4ite")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eoko0"]
+atlas = ExtResource("2_f4ite")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oiswh"]
+atlas = ExtResource("2_f4ite")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o80i7"]
+atlas = ExtResource("2_f4ite")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmhi0"]
+atlas = ExtResource("2_f4ite")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tka1s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ors2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eoko0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oiswh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o80i7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oiswh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eoko0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ors2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ors2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ors2")
+}],
+"loop": true,
+"name": &"CoinSpin",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmhi0")
+}],
+"loop": true,
+"name": &"Flat",
+"speed": 5.0
+}]
+
+[node name="TheoryCoin" type="Control" node_paths=PackedStringArray("anim", "label")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ycuej")
+anim = NodePath("Animation")
+label = NodePath("Label")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+texture_filter = 3
+sprite_frames = SubResource("SpriteFrames_tka1s")
+animation = &"CoinSpin"
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 3
+layout_mode = 0
+offset_left = -7.0
+offset_top = -11.0
+offset_right = 9.0
+offset_bottom = 12.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "0"
+
+[node name="ClickNode" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0

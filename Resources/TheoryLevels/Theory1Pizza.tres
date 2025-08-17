@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="TheoryResource" load_steps=2 format=3 uid="uid://y0c4665cc2pq"]
+
+[ext_resource type="Script" path="res://Scenes/Theory/TheoryResource.gd" id="1_ccbyq"]
+
+[resource]
+script = ExtResource("1_ccbyq")
+title = "Lazy caterer's sequence"
+description = "In this activity, you will learn about slicing pizza and the relation to the Bernoulli Triangle"
+objective_type = "The central polygonal number represents the max cuts that can be made on a disk with n cuts. Click to cut, how many pieces can be made from 3 cuts?"
+completion_message = "If each line crosses 2 other lines, then you can create 7 pieces from 3 cuts"
+reward_time = 0
+hints = Array[String](["Hint 1: Click 2 opposite ends of the circle to create a cut. ", "Hint 2: Try maximizing the amount of lines that any line crosses. There should be an inscribed triangle somewhere!"])
+correct_answer = Array[String](["7"])
+num_coins = 2
+denominations = Array[int]([3, 5])
+sum_coin_visible = false
+graph_visible = false
+max_points = 6

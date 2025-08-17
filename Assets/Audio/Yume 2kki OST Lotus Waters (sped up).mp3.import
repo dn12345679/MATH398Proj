@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dv1q2f8mkswaf"
+path="res://.godot/imported/Yume 2kki OST Lotus Waters (sped up).mp3-83f2617758e10ffb8a409c66a23ba78b.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Yume 2kki OST Lotus Waters (sped up).mp3"
+dest_files=["res://.godot/imported/Yume 2kki OST Lotus Waters (sped up).mp3-83f2617758e10ffb8a409c66a23ba78b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

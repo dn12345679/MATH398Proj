@@ -27,3 +27,4 @@ var rand: Vector2i = Vector2i(-1, -1) # to fill with randoms
 @export var number_contestants: int = 4
 @export var distance_from_center: float = 32.0 
 @export var colors: Array[Color] = []
+@export var can_simulate: bool = false

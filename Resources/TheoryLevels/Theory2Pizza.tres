@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="TheoryResource" load_steps=2 format=3 uid="uid://cjh5hw6shhq6p"]
+
+[ext_resource type="Script" path="res://Scenes/Theory/TheoryResource.gd" id="1_be3fa"]
+
+[resource]
+script = ExtResource("1_be3fa")
+title = ""
+description = "In part 2, you will explore more cases of the problem, and begin finding a pattern"
+objective_type = "Create the maximum pieces for 2, 4, and 5 cuts. Do you notice a pattern? Write the number of possible cuts for 5"
+completion_message = "If every line crosses n - 1 lines, then you can reach the maximum cuts"
+reward_time = 0
+hints = Array[String](["Hint 1: Try maximizing the amount of lines that any single line can cross. Depending on how you do it, you might even see some shapes, such as a 5-pointed star for 5 cuts!", "Hint 2: Take your solution for n = 3 cuts, then for the next line, for 4, make it cross n -1, or 3, lines, then for 5 ensure it crosses n - 1, or 4, lines"])
+correct_answer = Array[String](["16"])
+num_coins = 2
+denominations = Array[int]([3, 5])
+sum_coin_visible = false
+graph_visible = false
+max_points = 6

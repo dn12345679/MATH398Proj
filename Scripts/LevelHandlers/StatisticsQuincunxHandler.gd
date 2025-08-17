@@ -8,6 +8,7 @@ extends Handler
 @export var audio: AudioStreamPlayer2D
 @export var b_counter: Area2D
 @export var obj: Label
+
 @export var levels: Array[StatResource] # store level data 
 	## IMPORTANT: levels must exist for the game to be played
 

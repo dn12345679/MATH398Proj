@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="TheoryResource" load_steps=2 format=3 uid="uid://ctqyxjpe3dj2h"]
+
+[ext_resource type="Script" path="res://Scenes/Theory/TheoryResource.gd" id="1_066bi"]
+
+[resource]
+script = ExtResource("1_066bi")
+title = ""
+description = "In the final level, you will explore the relation of the Bernoulli Triangle and the Lazy Caterer's Pizza"
+objective_type = "The formula for the Lazy Caterer's Sequence is given, Along with the Bernoulli Triangle. Write a few thoughts on this."
+completion_message = "That concludes the lesson!"
+reward_time = 0
+hints = Array[String](["Hint 1: No correct answer, just note some observations and feel free to discuss", "Hint 2: Look down the third diagonal of the provided Bernoulli Triangle"])
+correct_answer = Array[String]([])
+num_coins = 2
+denominations = Array[int]([3, 5])
+sum_coin_visible = false
+graph_visible = false
+max_points = 10

@@ -1,0 +1,135 @@
+[gd_scene load_steps=20 format=3 uid="uid://w16cx8g7wttu"]
+
+[ext_resource type="Script" path="res://Scripts/LevelHandlers/TheoryCoinHandler.gd" id="1_gon4n"]
+[ext_resource type="Resource" uid="uid://ddih5837qaptp" path="res://Resources/TheoryLevels/Theory1Coin.tres" id="2_juaoc"]
+[ext_resource type="PackedScene" uid="uid://dcx3grdchm1hd" path="res://Components/ObjectiveComponent.tscn" id="2_oxnok"]
+[ext_resource type="Resource" uid="uid://cbo3nj4vo8b04" path="res://Resources/TheoryLevels/Theory2Coin.tres" id="3_c6rea"]
+[ext_resource type="PackedScene" uid="uid://d3mis1q8wvht3" path="res://Components/TheoryCoin.tscn" id="3_gp7p5"]
+[ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="3_gxknv"]
+[ext_resource type="Texture2D" uid="uid://dkb08qle4f24g" path="res://Assets/Images/money_bg.png" id="4_3u5pd"]
+[ext_resource type="PackedScene" uid="uid://bbt3x8ytel0qp" path="res://Components/UIComponent.tscn" id="4_hnmbi"]
+[ext_resource type="Resource" uid="uid://b33d5bpks5cwu" path="res://Resources/TheoryLevels/Theory3Coin.tres" id="4_wqtb4"]
+[ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="5_pohif"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueResource.gd" id="6_81t73"]
+[ext_resource type="AudioStream" uid="uid://dv1q2f8mkswaf" path="res://Assets/Audio/Yume 2kki OST Lotus Waters (sped up).mp3" id="9_2qs74"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueEntry.gd" id="10_mtj8p"]
+[ext_resource type="PackedScene" uid="uid://b5r4s3dyumsa8" path="res://Components/GraphObject.tscn" id="13_giktx"]
+[ext_resource type="PackedScene" uid="uid://cqoljpuhth2pq" path="res://Components/UIComponents/MenuButton.tscn" id="15_ovj5b"]
+
+[sub_resource type="Resource" id="Resource_42248"]
+resource_name = "DefaultName"
+script = ExtResource("10_mtj8p")
+level = 0
+id = 0
+dialogue = "Hello! In this task y ou will explore  \"impossible sums\""
+location = Vector2(-184, -24)
+duration = 0.7
+mood = "Speaking"
+
+[sub_resource type="Resource" id="Resource_xva17"]
+resource_name = "DefaultName"
+script = ExtResource("10_mtj8p")
+level = 0
+id = 1
+dialogue = "Follow the objective to begin!"
+location = Vector2(192, 56)
+duration = 0.6
+mood = "Correct"
+
+[sub_resource type="Resource" id="Resource_apjx6"]
+resource_name = "DefaultName"
+script = ExtResource("10_mtj8p")
+level = 1
+id = 0
+dialogue = "\"Left Click\" a Yellow coin to add its value to Green"
+location = Vector2(-128, 64)
+duration = 0.5
+mood = "Thinking"
+
+[sub_resource type="Resource" id="Resource_154ms"]
+resource_name = "DefaultName"
+script = ExtResource("10_mtj8p")
+level = 1
+id = 1
+dialogue = "\"Right Click\" a coin to reset the sum to 0"
+location = Vector2(104, 72)
+duration = 0.6
+mood = "Speaking"
+
+[node name="TheoryCoinProblem" type="Node2D" node_paths=PackedStringArray("audio", "obj", "wallet", "sum_coin", "graph", "objective", "game_ui", "mascot", "camera", "dialogue")]
+script = ExtResource("1_gon4n")
+audio = NodePath("AudioStreamPlayer2D")
+obj = NodePath("Objective")
+levels = Array[Resource("res://Scenes/Theory/TheoryResource.gd")]([ExtResource("2_juaoc"), ExtResource("3_c6rea"), ExtResource("4_wqtb4")])
+wallet = NodePath("Wallet/HBoxContainer")
+sum_coin = NodePath("Wallet/SumCoin")
+graph = NodePath("GraphObject")
+coin_scene = ExtResource("3_gp7p5")
+objective = NodePath("ObjectiveComponent")
+game_ui = NodePath("GameUI")
+mascot = NodePath("MascotComponent")
+camera = NodePath("CameraComponent")
+dialogue = NodePath("Dialogue")
+
+[node name="GraphObject" parent="." instance=ExtResource("13_giktx")]
+offset_left = -24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 24.0
+
+[node name="BG" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.215686)
+texture_filter = 3
+position = Vector2(-4.76837e-07, 8)
+scale = Vector2(10, 8.415)
+texture = ExtResource("4_3u5pd")
+
+[node name="Wallet" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Wallet"]
+layout_mode = 0
+offset_left = -40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 64
+
+[node name="SumCoin" parent="Wallet" instance=ExtResource("3_gp7p5")]
+modulate = Color(0.164706, 1, 1, 1)
+offset_top = -88.0
+offset_bottom = -88.0
+denomination = 0
+
+[node name="CameraComponent" parent="." instance=ExtResource("3_gxknv")]
+
+[node name="GameUI" parent="." instance=ExtResource("4_hnmbi")]
+metadata/_edit_lock_ = true
+
+[node name="MascotComponent" parent="." instance=ExtResource("5_pohif")]
+position = Vector2(-192, -64)
+
+[node name="Dialogue" type="Node2D" parent="."]
+script = ExtResource("6_81t73")
+custom_res = Array[Resource]([SubResource("Resource_42248"), SubResource("Resource_xva17"), SubResource("Resource_apjx6"), SubResource("Resource_154ms")])
+
+[node name="Objective" type="Label" parent="."]
+offset_left = 160.0
+offset_top = -112.0
+offset_right = 256.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 10
+text = "Objective"
+autowrap_mode = 3
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_2qs74")
+volume_db = -15.0
+bus = &"Music"
+
+[node name="ObjectiveComponent" parent="." instance=ExtResource("2_oxnok")]
+position = Vector2(0, -16)
+
+[node name="MenuButton" parent="." instance=ExtResource("15_ovj5b")]
+position = Vector2(216, 88)

@@ -1,6 +1,7 @@
 class_name DynamicCamera
 extends Node2D
 
+
 ## Camera for the game, intended to handle all movement, from the positioning to the zoom
 ## Dependency: Uses the CameraSequence.gd script to handle interactions
 

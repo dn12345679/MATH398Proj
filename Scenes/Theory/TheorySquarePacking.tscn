@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=3 uid="uid://cf0en4rnytq5h"]
+
+[ext_resource type="Script" path="res://Scripts/LevelHandlers/TheorySquareHandler.gd" id="1_om5n7"]
+[ext_resource type="Script" path="res://Scripts/TheoryBox.gd" id="1_v4pqj"]
+[ext_resource type="Texture2D" uid="uid://cb0cy4nxqwuyi" path="res://Assets/Images/quincunx_bar.png" id="2_1bsuq"]
+[ext_resource type="Resource" uid="uid://dn47vrn0rhth6" path="res://Resources/TheoryLevels/Theory1Square.tres" id="2_8r1jh"]
+[ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="2_vspsc"]
+[ext_resource type="PackedScene" uid="uid://cqoljpuhth2pq" path="res://Components/UIComponents/MenuButton.tscn" id="5_66hka"]
+[ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="6_xlh52"]
+[ext_resource type="PackedScene" uid="uid://bbt3x8ytel0qp" path="res://Components/UIComponent.tscn" id="9_d5xht"]
+[ext_resource type="PackedScene" uid="uid://dcx3grdchm1hd" path="res://Components/ObjectiveComponent.tscn" id="10_hajiw"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueResource.gd" id="10_i30m7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j807c"]
+size = Vector2(2704, 64)
+
+[node name="TheorySquarePacking" type="Node2D" node_paths=PackedStringArray("audio", "obj", "add_new_button", "objective", "game_ui", "mascot", "camera", "dialogue")]
+script = ExtResource("1_om5n7")
+audio = NodePath("AudioStreamPlayer2D")
+obj = NodePath("Objective")
+levels = Array[Resource("res://Scenes/Theory/TheoryResource.gd")]([ExtResource("2_8r1jh")])
+add_new_button = NodePath("GetNew")
+objective = NodePath("ObjectiveComponent")
+game_ui = NodePath("GameUI")
+mascot = NodePath("MascotComponent")
+camera = NodePath("CameraComponent")
+dialogue = NodePath("Dialogue")
+
+[node name="CameraComponent" parent="." instance=ExtResource("2_vspsc")]
+
+[node name="Box" type="StaticBody2D" parent="."]
+texture_filter = 3
+script = ExtResource("1_v4pqj")
+wall_texture = ExtResource("2_1bsuq")
+
+[node name="MascotComponent" parent="." instance=ExtResource("6_xlh52")]
+position = Vector2(-157, 33)
+
+[node name="MenuButton" parent="." instance=ExtResource("5_66hka")]
+position = Vector2(220, 94)
+
+[node name="GameUI" parent="." instance=ExtResource("9_d5xht")]
+
+[node name="ObjectiveComponent" parent="." instance=ExtResource("10_hajiw")]
+
+[node name="Dialogue" type="Node2D" parent="."]
+script = ExtResource("10_i30m7")
+
+[node name="GetNew" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0.603922)
+texture_filter = 3
+offset_left = -152.0
+offset_top = -103.0
+offset_right = -120.0
+offset_bottom = -71.0
+texture_normal = ExtResource("2_1bsuq")
+
+[node name="Label" type="Label" parent="GetNew"]
+layout_mode = 0
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 61.0
+offset_bottom = -2.0
+text = "Get Square
+"
+
+[node name="KillBox" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillBox"]
+position = Vector2(-1, 173)
+shape = SubResource("RectangleShape2D_j807c")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"Music"
+
+[node name="Objective" type="Label" parent="."]
+offset_left = 117.0
+offset_top = -81.0
+offset_right = 236.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 12
+text = "Objective"
+autowrap_mode = 3
+
+[connection signal="button_down" from="GetNew" to="." method="_on_get_new_button_down"]
+[connection signal="body_entered" from="KillBox" to="." method="_on_kill_box_body_entered"]

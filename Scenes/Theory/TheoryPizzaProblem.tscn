@@ -1,0 +1,144 @@
+[gd_scene load_steps=24 format=3 uid="uid://b7iw1bhsa7aat"]
+
+[ext_resource type="Script" path="res://Scripts/LevelHandlers/TheoryPizzaHandler.gd" id="1_j2qpm"]
+[ext_resource type="Texture2D" uid="uid://pi37nojxh0sk" path="res://Assets/Images/pizza.png" id="1_srqby"]
+[ext_resource type="Resource" uid="uid://y0c4665cc2pq" path="res://Resources/TheoryLevels/Theory1Pizza.tres" id="2_2w7md"]
+[ext_resource type="Texture2D" uid="uid://dudv88a7rvakb" path="res://Assets/Images/wood_texture.png" id="2_qhcn0"]
+[ext_resource type="Script" path="res://Scripts/PizzaObject.gd" id="3_a1s3y"]
+[ext_resource type="Resource" uid="uid://cjh5hw6shhq6p" path="res://Resources/TheoryLevels/Theory2Pizza.tres" id="3_nd8n2"]
+[ext_resource type="PackedScene" uid="uid://dcx3grdchm1hd" path="res://Components/ObjectiveComponent.tscn" id="3_w3ipr"]
+[ext_resource type="Resource" uid="uid://ctqyxjpe3dj2h" path="res://Resources/TheoryLevels/Theory3Pizza.tres" id="4_g84h5"]
+[ext_resource type="PackedScene" uid="uid://bbt3x8ytel0qp" path="res://Components/UIComponent.tscn" id="4_pt1gi"]
+[ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="5_26kys"]
+[ext_resource type="AudioStream" uid="uid://c0gc6y3dxqnr8" path="res://Assets/Audio/point.mp3" id="5_erym5"]
+[ext_resource type="AudioStream" uid="uid://dnhesleknuh8k" path="res://Assets/Audio/chop.mp3" id="6_e3kdi"]
+[ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="6_ud3wd"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueResource.gd" id="7_cs6hc"]
+[ext_resource type="AudioStream" uid="uid://camlam5fhoohm" path="res://Assets/Audio/taste_of_italy.mp3" id="12_qha8c"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueEntry.gd" id="13_jepye"]
+[ext_resource type="Texture2D" uid="uid://df6btju6aoljx" path="res://Assets/Images/lazy_caterer_eq.png" id="16_pcyai"]
+[ext_resource type="Texture2D" uid="uid://cxqhpjj3ovj1d" path="res://Assets/Images/bernoulli.png" id="17_gssel"]
+[ext_resource type="PackedScene" uid="uid://cqoljpuhth2pq" path="res://Components/UIComponents/MenuButton.tscn" id="19_6i88e"]
+
+[sub_resource type="Resource" id="Resource_bmkpv"]
+resource_name = "DefaultName"
+script = ExtResource("13_jepye")
+level = 0
+id = 0
+dialogue = "Hello! Welcoome to the lazy caterer's problem!"
+location = Vector2(-192, 0)
+duration = 1.0
+mood = "Wave"
+
+[sub_resource type="Resource" id="Resource_8urau"]
+resource_name = "DefaultName"
+script = ExtResource("13_jepye")
+level = 0
+id = 0
+dialogue = "Click around the crust of hte pizza to add points!"
+location = Vector2(-192, 0)
+duration = 0.7
+mood = "Speaking"
+
+[sub_resource type="Resource" id="Resource_xa53y"]
+resource_name = "DefaultName"
+script = ExtResource("13_jepye")
+level = 0
+id = 1
+dialogue = "2 points will automatically create a line cut!"
+location = Vector2(-160, 80)
+duration = 0.5
+mood = "Correct"
+
+[sub_resource type="Resource" id="Resource_af47l"]
+resource_name = "DefaultName"
+script = ExtResource("13_jepye")
+level = 2
+id = 0
+dialogue = "Thanks to Wikipedia for providing these cool images!"
+location = Vector2(-232, -16)
+duration = 0.8
+mood = "Speaking"
+
+[node name="TheoryPizzaProblem" type="Node2D" node_paths=PackedStringArray("audio", "obj", "objective", "game_ui", "mascot", "camera", "dialogue")]
+script = ExtResource("1_j2qpm")
+audio = NodePath("AudioStreamPlayer2D")
+obj = NodePath("Objective")
+levels = Array[Resource("res://Scenes/Theory/TheoryResource.gd")]([ExtResource("2_2w7md"), ExtResource("3_nd8n2"), ExtResource("4_g84h5")])
+objective = NodePath("ObjectiveComponent")
+game_ui = NodePath("GameUI")
+mascot = NodePath("MascotComponent")
+camera = NodePath("CameraComponent")
+dialogue = NodePath("Dialogue")
+
+[node name="BG" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+texture_filter = 3
+position = Vector2(0, -0.03)
+rotation = 1.5708
+scale = Vector2(3, 3)
+texture = ExtResource("2_qhcn0")
+metadata/_edit_lock_ = true
+
+[node name="PizzaObject" type="Sprite2D" parent="." node_paths=PackedStringArray("audio")]
+texture_filter = 3
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("1_srqby")
+script = ExtResource("3_a1s3y")
+audio = NodePath("SFX")
+point_audio = ExtResource("5_erym5")
+cut_audio = ExtResource("6_e3kdi")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="PizzaObject"]
+bus = &"SFX"
+
+[node name="ClickArea" type="TextureRect" parent="PizzaObject"]
+offset_left = -477.0
+offset_top = -477.0
+offset_right = 477.0
+offset_bottom = 477.0
+
+[node name="GameUI" parent="." instance=ExtResource("4_pt1gi")]
+offset_top = 8.0
+offset_bottom = 8.0
+
+[node name="MascotComponent" parent="." instance=ExtResource("5_26kys")]
+position = Vector2(-160, -24)
+
+[node name="CameraComponent" parent="." instance=ExtResource("6_ud3wd")]
+
+[node name="ObjectiveComponent" parent="." instance=ExtResource("3_w3ipr")]
+position = Vector2(9.09495e-13, -8)
+
+[node name="Dialogue" type="Node2D" parent="."]
+script = ExtResource("7_cs6hc")
+custom_res = Array[Resource]([SubResource("Resource_bmkpv"), SubResource("Resource_8urau"), SubResource("Resource_xa53y"), SubResource("Resource_af47l")])
+
+[node name="Objective" type="Label" parent="."]
+texture_filter = 3
+offset_left = 152.0
+offset_top = -72.0
+offset_right = 280.0
+offset_bottom = -49.0
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 3
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_qha8c")
+volume_db = -20.0
+bus = &"Music"
+
+[node name="LazyCatererEq" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-208, 120)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("16_pcyai")
+
+[node name="Bernoulli" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-208, 48)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("17_gssel")
+
+[node name="MenuButton" parent="." instance=ExtResource("19_6i88e")]
+position = Vector2(216, 88)

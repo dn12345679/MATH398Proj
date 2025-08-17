@@ -27,3 +27,6 @@ func handle_level(res: StatResource):
 		josephus_obj.colors = res.colors
 	
 	josephus_obj._randomize_seating()
+	josephus_obj.get_node("Simulate").visible = res.can_simulate
+	josephus_obj.can_simulate = res.can_simulate
+

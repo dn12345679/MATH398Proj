@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5r4s3dyumsa8"]
+
+[ext_resource type="Script" path="res://Scripts/GraphObject.gd" id="1_wrnf2"]
+[ext_resource type="Script" path="res://Scripts/GraphAxesLayer.gd" id="2_esgmw"]
+[ext_resource type="Script" path="res://Scripts/GraphLineLayer.gd" id="3_75trj"]
+[ext_resource type="Script" path="res://Scripts/GraphPointsLayer.gd" id="4_rokdw"]
+
+[node name="GraphObject" type="Control" node_paths=PackedStringArray("z_slider", "axes_layer", "points_layer", "line_layer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wrnf2")
+z_slider = NodePath("z_value")
+axes_layer = NodePath("AxesLayer")
+points_layer = NodePath("PointsLayer")
+line_layer = NodePath("LineLayer")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -118.0
+offset_top = -160.0
+offset_right = 167.0
+offset_bottom = 43.0
+color = Color(1, 1, 1, 0.227451)
+
+[node name="AxesLayer" type="Control" parent="."]
+anchors_preset = 0
+script = ExtResource("2_esgmw")
+
+[node name="LineLayer" type="Control" parent="."]
+anchors_preset = 0
+script = ExtResource("3_75trj")
+
+[node name="PointsLayer" type="Control" parent="."]
+anchors_preset = 0
+script = ExtResource("4_rokdw")
+
+[node name="z_value" type="HSlider" parent="."]
+texture_filter = 4
+layout_mode = 0
+offset_top = 24.0
+offset_right = 160.0
+offset_bottom = 40.0
+max_value = 60.0
+
+[node name="Label" type="Label" parent="z_value"]
+layout_mode = 0
+offset_left = -110.0
+offset_top = -4.0
+offset_right = -5.0
+offset_bottom = 19.0
+text = "Z-value (Sum)"
+
+[node name="Equation" type="Label" parent="."]
+layout_mode = 0
+offset_left = -96.0
+offset_top = -101.0
+offset_right = -56.0
+offset_bottom = -78.6667
+text = "Equation:
+3x + 5y = Z"
+
+[connection signal="drag_ended" from="z_value" to="." method="_on_z_value_drag_ended"]
