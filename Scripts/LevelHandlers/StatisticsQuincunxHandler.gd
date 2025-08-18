@@ -21,7 +21,8 @@ func _ready():
 	if Global.curr_level_idx < Global.max_level_idx and Global.curr_level_idx < len(levels):
 		handle_level(levels[Global.curr_level_idx])
 		game_ui.curr_level_resource = levels[Global.curr_level_idx]
-	
+	else:
+		super.handle_all_levels_complete()		
 
 
 ## handles card drawing, setting scene, etc

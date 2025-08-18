@@ -19,6 +19,7 @@ signal answer_incorrect(answer)
 @export var restart_btn: TextureButton
 @export var hint_bulbs: HBoxContainer
 @export var answer: AnswerComponent
+@export var explanation: ExplanationComponent
 
 @export var time_label: Label
 @export var timer: Timer
@@ -41,7 +42,12 @@ func _ready():
 	answer.answer_correct.connect(signal_correct)
 
 func signal_correct(ans):
+	
+	explanation.visible = true
+	explanation.set_completion_message(curr_level_resource.completion_message, 300 - game_time)
+	await explanation.answer_closed
 	Global.curr_level_idx += 1
+	
 	get_tree().reload_current_scene()
 
 # this is out of place, but it just makes the Mascot react to incorrect answers

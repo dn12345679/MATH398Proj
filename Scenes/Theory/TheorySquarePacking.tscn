@@ -1,30 +1,103 @@
-[gd_scene load_steps=12 format=3 uid="uid://cf0en4rnytq5h"]
+[gd_scene load_steps=23 format=3 uid="uid://cf0en4rnytq5h"]
 
 [ext_resource type="Script" path="res://Scripts/LevelHandlers/TheorySquareHandler.gd" id="1_om5n7"]
 [ext_resource type="Script" path="res://Scripts/TheoryBox.gd" id="1_v4pqj"]
 [ext_resource type="Texture2D" uid="uid://cb0cy4nxqwuyi" path="res://Assets/Images/quincunx_bar.png" id="2_1bsuq"]
 [ext_resource type="Resource" uid="uid://dn47vrn0rhth6" path="res://Resources/TheoryLevels/Theory1Square.tres" id="2_8r1jh"]
 [ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="2_vspsc"]
+[ext_resource type="Texture2D" uid="uid://dnb1wd6lv0st6" path="res://Assets/Images/cubesbg.jpg" id="3_ifh3v"]
+[ext_resource type="Resource" uid="uid://cp2xcp5wewjfj" path="res://Resources/TheoryLevels/Theory2Square.tres" id="3_paf2q"]
+[ext_resource type="Resource" uid="uid://siyqrtagbrca" path="res://Resources/TheoryLevels/Theory3Square.tres" id="4_odbee"]
 [ext_resource type="PackedScene" uid="uid://cqoljpuhth2pq" path="res://Components/UIComponents/MenuButton.tscn" id="5_66hka"]
 [ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="6_xlh52"]
 [ext_resource type="PackedScene" uid="uid://bbt3x8ytel0qp" path="res://Components/UIComponent.tscn" id="9_d5xht"]
 [ext_resource type="PackedScene" uid="uid://dcx3grdchm1hd" path="res://Components/ObjectiveComponent.tscn" id="10_hajiw"]
 [ext_resource type="Script" path="res://Scripts/Dialogue/DialogueResource.gd" id="10_i30m7"]
+[ext_resource type="AudioStream" uid="uid://oxtrjb5ct681" path="res://Assets/Audio/animal_melancholy.mp3" id="12_km1me"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueEntry.gd" id="12_mm8ax"]
+
+[sub_resource type="Resource" id="Resource_r16uq"]
+resource_name = "DefaultName"
+script = ExtResource("12_mm8ax")
+level = 0
+id = 0
+dialogue = "Welcome to Square packing!"
+location = Vector2(-157, 33)
+duration = 0.6
+mood = "Wave"
+
+[sub_resource type="Resource" id="Resource_ed73v"]
+resource_name = "DefaultName"
+script = ExtResource("12_mm8ax")
+level = 0
+id = 1
+dialogue = "To start, Left click the square to obtain a cube.  "
+location = Vector2(-225, -2)
+duration = 1.0
+mood = "Speaking"
+
+[sub_resource type="Resource" id="Resource_a3lto"]
+resource_name = "DefaultName"
+script = ExtResource("12_mm8ax")
+level = 0
+id = 2
+dialogue = "To delete a cube, drop it down here! I'll clean it up!"
+location = Vector2(-212, 124)
+duration = 0.7
+mood = "Incorrect"
+
+[sub_resource type="Resource" id="Resource_meeo3"]
+resource_name = "DefaultName"
+script = ExtResource("12_mm8ax")
+level = 0
+id = 3
+dialogue = "Move the cube into the center. Left click to drop"
+location = Vector2(0, -52)
+duration = 0.7
+mood = "Thinking"
+
+[sub_resource type="Resource" id="Resource_6ikrc"]
+resource_name = "DefaultName"
+script = ExtResource("12_mm8ax")
+level = 2
+id = 0
+dialogue = "For the last part, press here to customize the length!"
+location = Vector2(-206, -54)
+duration = 0.5
+mood = "Speaking"
+
+[sub_resource type="Resource" id="Resource_drc0s"]
+resource_name = "DefaultName"
+script = ExtResource("12_mm8ax")
+level = 2
+id = 1
+dialogue = "Feel free to experiment!"
+location = Vector2(229, 13)
+duration = 0.8
+mood = "Correct"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j807c"]
 size = Vector2(2704, 64)
 
-[node name="TheorySquarePacking" type="Node2D" node_paths=PackedStringArray("audio", "obj", "add_new_button", "objective", "game_ui", "mascot", "camera", "dialogue")]
+[node name="TheorySquarePacking" type="Node2D" node_paths=PackedStringArray("audio", "obj", "add_new_button", "center_box", "custom_lengths", "objective", "game_ui", "mascot", "camera", "dialogue")]
 script = ExtResource("1_om5n7")
 audio = NodePath("AudioStreamPlayer2D")
 obj = NodePath("Objective")
-levels = Array[Resource("res://Scenes/Theory/TheoryResource.gd")]([ExtResource("2_8r1jh")])
+levels = Array[Resource("res://Scenes/Theory/TheoryResource.gd")]([ExtResource("2_8r1jh"), ExtResource("3_paf2q"), ExtResource("4_odbee")])
 add_new_button = NodePath("GetNew")
+center_box = NodePath("Box")
+custom_lengths = NodePath("SelectLengths")
 objective = NodePath("ObjectiveComponent")
 game_ui = NodePath("GameUI")
 mascot = NodePath("MascotComponent")
 camera = NodePath("CameraComponent")
 dialogue = NodePath("Dialogue")
+
+[node name="Cubesbg" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.470588)
+position = Vector2(2, -3)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_ifh3v")
 
 [node name="CameraComponent" parent="." instance=ExtResource("2_vspsc")]
 
@@ -34,7 +107,7 @@ script = ExtResource("1_v4pqj")
 wall_texture = ExtResource("2_1bsuq")
 
 [node name="MascotComponent" parent="." instance=ExtResource("6_xlh52")]
-position = Vector2(-157, 33)
+position = Vector2(229, 13)
 
 [node name="MenuButton" parent="." instance=ExtResource("5_66hka")]
 position = Vector2(220, 94)
@@ -45,9 +118,9 @@ position = Vector2(220, 94)
 
 [node name="Dialogue" type="Node2D" parent="."]
 script = ExtResource("10_i30m7")
+custom_res = Array[Resource]([SubResource("Resource_r16uq"), SubResource("Resource_ed73v"), SubResource("Resource_a3lto"), SubResource("Resource_meeo3"), SubResource("Resource_6ikrc"), SubResource("Resource_drc0s")])
 
 [node name="GetNew" type="TextureButton" parent="."]
-modulate = Color(1, 1, 1, 0.603922)
 texture_filter = 3
 offset_left = -152.0
 offset_top = -103.0
@@ -56,6 +129,7 @@ offset_bottom = -71.0
 texture_normal = ExtResource("2_1bsuq")
 
 [node name="Label" type="Label" parent="GetNew"]
+texture_filter = 3
 layout_mode = 0
 offset_left = -25.0
 offset_top = -25.0
@@ -72,6 +146,8 @@ position = Vector2(-1, 173)
 shape = SubResource("RectangleShape2D_j807c")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_km1me")
+volume_db = -20.0
 bus = &"Music"
 
 [node name="Objective" type="Label" parent="."]
@@ -82,6 +158,30 @@ offset_bottom = 67.0
 theme_override_font_sizes/font_size = 12
 text = "Objective"
 autowrap_mode = 3
+
+[node name="SelectLengths" type="MenuButton" parent="."]
+visible = false
+texture_filter = 3
+offset_left = -222.0
+offset_top = -42.0
+offset_right = -122.0
+offset_bottom = -16.0
+theme_override_font_sizes/font_size = 12
+text = "Length: 2"
+switch_on_hover = true
+item_count = 6
+popup/item_0/text = "2"
+popup/item_0/id = 0
+popup/item_1/text = "2.7"
+popup/item_1/id = 1
+popup/item_2/text = "3"
+popup/item_2/id = 2
+popup/item_3/text = "3.7"
+popup/item_3/id = 3
+popup/item_4/text = "4"
+popup/item_4/id = 4
+popup/item_5/text = "4.7"
+popup/item_5/id = 5
 
 [connection signal="button_down" from="GetNew" to="." method="_on_get_new_button_down"]
 [connection signal="body_entered" from="KillBox" to="." method="_on_kill_box_body_entered"]

@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0bb0sd6xru48"]
+
+[ext_resource type="Script" path="res://Scripts/ExplanationComponent.gd" id="1_yishr"]
+[ext_resource type="Texture2D" uid="uid://c0rd5gb8h6jbh" path="res://Assets/Images/PokerTable.png" id="2_fwgfq"]
+[ext_resource type="PackedScene" uid="uid://cqoljpuhth2pq" path="res://Components/UIComponents/MenuButton.tscn" id="3_berbm"]
+
+[node name="Explanation" type="Control" node_paths=PackedStringArray("completion_msg", "explanation_msg")]
+process_mode = 3
+process_priority = 5
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yishr")
+completion_msg = NodePath("LevelComplete")
+explanation_msg = NodePath("Explanation")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 104.0
+offset_right = 1320.0
+offset_bottom = 752.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_fwgfq")
+
+[node name="LevelComplete" type="Label" parent="."]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 152.0
+offset_right = 651.0
+offset_bottom = 222.0
+theme_override_font_sizes/font_size = 50
+text = "Level Complete: 30s
+"
+
+[node name="Explanation" type="Label" parent="."]
+texture_filter = 3
+layout_mode = 0
+offset_left = 328.0
+offset_top = 240.0
+offset_right = 640.0
+offset_bottom = 336.0
+theme_override_font_sizes/font_size = 25
+text = "This is because..."
+autowrap_mode = 3
+
+[node name="ContinueButton" type="Button" parent="."]
+process_priority = 5
+process_physics_priority = 5
+z_index = 7
+layout_mode = 0
+offset_left = 704.0
+offset_top = 440.0
+offset_right = 783.0
+offset_bottom = 487.0
+text = "Continue
+"
+
+[node name="MenuButton" parent="." instance=ExtResource("3_berbm")]
+position = Vector2(224, 440)
+
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]

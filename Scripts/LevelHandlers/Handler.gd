@@ -20,7 +20,6 @@ func handle_all_levels_complete() -> void:
 	get_tree().paused = false
 	await get_tree().process_frame
 	Global.curr_level_idx = 0
-	print("yeah")
 	get_tree().change_scene_to_file("res://Scenes/Main.tscn")
 
 func _ready():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://w16cx8g7wttu"]
+[gd_scene load_steps=22 format=3 uid="uid://w16cx8g7wttu"]
 
 [ext_resource type="Script" path="res://Scripts/LevelHandlers/TheoryCoinHandler.gd" id="1_gon4n"]
 [ext_resource type="Resource" uid="uid://ddih5837qaptp" path="res://Resources/TheoryLevels/Theory1Coin.tres" id="2_juaoc"]
@@ -56,6 +56,26 @@ location = Vector2(104, 72)
 duration = 0.6
 mood = "Speaking"
 
+[sub_resource type="Resource" id="Resource_fgcnh"]
+resource_name = "DefaultName"
+script = ExtResource("10_mtj8p")
+level = 2
+id = 0
+dialogue = "Look at the red dots on the graph."
+location = Vector2(-192, -64)
+duration = 0.5
+mood = "Speaking"
+
+[sub_resource type="Resource" id="Resource_pxh15"]
+resource_name = "DefaultName"
+script = ExtResource("10_mtj8p")
+level = 2
+id = 0
+dialogue = "They represent positive integer combinations of 3 and 5!"
+location = Vector2(-192, -64)
+duration = 0.7
+mood = "Thinking"
+
 [node name="TheoryCoinProblem" type="Node2D" node_paths=PackedStringArray("audio", "obj", "wallet", "sum_coin", "graph", "objective", "game_ui", "mascot", "camera", "dialogue")]
 script = ExtResource("1_gon4n")
 audio = NodePath("AudioStreamPlayer2D")
@@ -112,7 +132,7 @@ position = Vector2(-192, -64)
 
 [node name="Dialogue" type="Node2D" parent="."]
 script = ExtResource("6_81t73")
-custom_res = Array[Resource]([SubResource("Resource_42248"), SubResource("Resource_xva17"), SubResource("Resource_apjx6"), SubResource("Resource_154ms")])
+custom_res = Array[Resource]([SubResource("Resource_42248"), SubResource("Resource_xva17"), SubResource("Resource_apjx6"), SubResource("Resource_154ms"), SubResource("Resource_fgcnh"), SubResource("Resource_pxh15")])
 
 [node name="Objective" type="Label" parent="."]
 offset_left = 160.0

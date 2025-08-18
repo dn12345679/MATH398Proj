@@ -6,6 +6,7 @@ extends Handler
 @export var audio: AudioStreamPlayer2D
 @export var obj: Label
 @export var levels: Array[TheoryResource] # store level data 
+@export var pizza: PizzaObject
 
 func _ready():
 	super._ready()
@@ -21,7 +22,7 @@ func handle_level(res: TheoryResource):
 	
 	obj.text = res.objective_type
 	objective.update_text(res.description) # handler main class
-	
+	pizza.max_points = res.max_points
 	if Global.curr_level_idx == 2:
 		$LazyCatererEq.visible = true
 		$Bernoulli.visible = true

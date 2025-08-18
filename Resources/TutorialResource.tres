@@ -22,3 +22,7 @@ number_chairs = 16
 number_contestants = 4
 distance_from_center = 32.0
 colors = Array[Color]([])
+can_simulate = false
+needle_length = 31.0
+line_distance = 40.0
+can_drop_100 = false

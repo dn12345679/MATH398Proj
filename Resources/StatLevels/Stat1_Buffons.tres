@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="StatResource" load_steps=2 format=3 uid="uid://bigpt11qhnraf"]
+
+[ext_resource type="Script" path="res://Scenes/Statistics/StatResource.gd" id="1_e4ia6"]
+
+[resource]
+script = ExtResource("1_e4ia6")
+title = ""
+description = "In this activity, you will learn the experimental variation of the Buffons Needle"
+objective_type = "What percentage of the time do you expect or think the needle to land on or through a line? Press \"Drop\" to experiment!"
+completion_message = "Good Guess!"
+reward_time = 0
+hints = Array[String](["Hint 1: Just enter a guess. The format of the answer can be a percentage, decimal, or number", "Hint 2: Just enter a guess. The format of the answer can be a percentage, decimal, or number"])
+correct_answer = Array[String]([])
+card_draw = Array[Vector2i]([])
+card_count = 0
+replacement = false
+allow_delete_pegs = false
+max_peg_delete = null
+distribution = Array[int]([-1, 1])
+initial_distance = 0.0
+number_chairs = 16
+number_contestants = 4
+distance_from_center = 32.0
+colors = Array[Color]([])
+can_simulate = false
+needle_length = 31.0
+line_distance = 40.0

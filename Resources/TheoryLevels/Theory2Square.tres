@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="TheoryResource" load_steps=2 format=3 uid="uid://cp2xcp5wewjfj"]
+
+[ext_resource type="Script" path="res://Scenes/Theory/TheoryResource.gd" id="1_32nr7"]
+
+[resource]
+script = ExtResource("1_32nr7")
+title = ""
+description = "In this part of the activity, you will attempt to figure out how many squares you can truly fit inside a length N square"
+objective_type = "Lets increase the size a little bit. The square is  now slightly larger. How many squares can you fit?"
+completion_message = "Correct, if there are 4 squares in the corners, and 1 in the center as a diamond, you can fit 5 squares."
+reward_time = 0
+hints = Array[String](["Hint 1: Use your creativity! What if you rotated some of the squares to preserve space?", "Hint 2: Try placing 4 squares in each of the corners, then 1 in the middle"])
+correct_answer = Array[String](["5"])
+num_coins = 2
+denominations = Array[int]([3, 5])
+sum_coin_visible = false
+graph_visible = false
+max_points = 6
+max_cubes = 10
+box_dimension = 2.707
+dropdown_visible = false

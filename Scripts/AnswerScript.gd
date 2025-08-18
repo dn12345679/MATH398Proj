@@ -20,6 +20,7 @@ func check_answer():
 	if len(curr_level_resource.correct_answer) == 0 or  ans2str in curr_level_resource.correct_answer:
 		get_tree().paused = false
 		answer_correct.emit(ans2str)
+		
 	else:
 		answer_incorrect.emit(ans2str)
 		close()

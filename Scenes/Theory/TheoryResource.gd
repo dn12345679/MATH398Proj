@@ -21,3 +21,4 @@ extends Resource
 @export_category("Square Problem")
 @export var max_cubes: int = 4
 @export var box_dimension: float = 2
+@export var dropdown_visible: bool = false

@@ -1,0 +1,120 @@
+[gd_scene load_steps=17 format=3 uid="uid://c6eah6fvmswno"]
+
+[ext_resource type="Script" path="res://Scripts/LevelHandlers/StatisticsBuffonHandler.gd" id="1_wjj6f"]
+[ext_resource type="PackedScene" uid="uid://dcx3grdchm1hd" path="res://Components/ObjectiveComponent.tscn" id="2_gmv05"]
+[ext_resource type="Texture2D" uid="uid://ca4doob4seidf" path="res://Assets/Images/checkered_background.png" id="2_gsk2x"]
+[ext_resource type="Resource" uid="uid://bigpt11qhnraf" path="res://Resources/StatLevels/Stat1_Buffons.tres" id="2_qaikv"]
+[ext_resource type="Resource" uid="uid://ddg7tks00dpp3" path="res://Resources/StatLevels/Stat2_Buffons.tres" id="3_3joe7"]
+[ext_resource type="PackedScene" uid="uid://bbt3x8ytel0qp" path="res://Components/UIComponent.tscn" id="3_d82hm"]
+[ext_resource type="Texture2D" uid="uid://dudv88a7rvakb" path="res://Assets/Images/wood_texture.png" id="3_h1vwc"]
+[ext_resource type="PackedScene" uid="uid://buolqtcajlxo6" path="res://Components/MascotComponent.tscn" id="4_6rxds"]
+[ext_resource type="AudioStream" uid="uid://cdkngtryv0yso" path="res://Assets/Audio/pindrop.mp3" id="4_irw0e"]
+[ext_resource type="Resource" uid="uid://r4dpqw7vh1lg" path="res://Resources/StatLevels/Stat3_Buffons.tres" id="4_mplst"]
+[ext_resource type="AudioStream" uid="uid://end1tkyua7fs" path="res://Assets/Audio/anvildrop.mp3" id="5_4ahed"]
+[ext_resource type="PackedScene" uid="uid://favil3r5k7h7" path="res://Components/CameraComponent.tscn" id="5_fbc5m"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueResource.gd" id="6_0ldh8"]
+[ext_resource type="AudioStream" uid="uid://bxr1d1nmjuda6" path="res://Assets/Audio/jazz2_casino.mp3" id="12_qvrdr"]
+[ext_resource type="Texture2D" uid="uid://cpfteposfymj7" path="res://Assets/Images/buffonNeedle.png" id="15_40bh3"]
+[ext_resource type="PackedScene" uid="uid://cqoljpuhth2pq" path="res://Components/UIComponents/MenuButton.tscn" id="16_mi65a"]
+
+[node name="StatBuffonsNeedle" type="Node2D" node_paths=PackedStringArray("audio", "obj", "stat_node", "objective", "game_ui", "mascot", "camera", "dialogue")]
+script = ExtResource("1_wjj6f")
+audio = NodePath("Music")
+obj = NodePath("Objective")
+levels = Array[Resource("res://Scenes/Statistics/StatResource.gd")]([ExtResource("2_qaikv"), ExtResource("3_3joe7"), ExtResource("4_mplst")])
+stat_node = NodePath("Stats")
+needle_texture = ExtResource("3_h1vwc")
+needle_drop_sfx = ExtResource("4_irw0e")
+needle_drop_sfx_loud = ExtResource("5_4ahed")
+objective = NodePath("ObjectiveComponent")
+game_ui = NodePath("GameUI")
+mascot = NodePath("MascotComponent")
+camera = NodePath("CameraComponent")
+dialogue = NodePath("Dialogue")
+
+[node name="CheckeredBackground" type="Sprite2D" parent="."]
+modulate = Color(0.682353, 1, 1, 0.568627)
+texture_filter = 3
+position = Vector2(-1, 2)
+scale = Vector2(16, 16)
+texture = ExtResource("2_gsk2x")
+
+[node name="DropNeedle" type="Button" parent="."]
+offset_left = 144.0
+offset_top = 64.0
+offset_right = 208.0
+offset_bottom = 95.0
+text = "Drop!"
+
+[node name="Drop100" type="Button" parent="."]
+offset_left = 144.0
+offset_top = 32.0
+offset_right = 227.0
+offset_bottom = 63.0
+text = "Drop 100!"
+
+[node name="GameUI" parent="." instance=ExtResource("3_d82hm")]
+
+[node name="ObjectiveComponent" parent="." instance=ExtResource("2_gmv05")]
+
+[node name="MascotComponent" parent="." instance=ExtResource("4_6rxds")]
+position = Vector2(184, -128)
+
+[node name="CameraComponent" parent="." instance=ExtResource("5_fbc5m")]
+
+[node name="Dialogue" type="Node2D" parent="."]
+script = ExtResource("6_0ldh8")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_qvrdr")
+volume_db = -20.0
+bus = &"Music"
+
+[node name="Objective" type="Label" parent="."]
+offset_left = 152.0
+offset_top = -112.0
+offset_right = 269.0
+offset_bottom = -90.0
+theme_override_font_sizes/font_size = 10
+text = "Objective: "
+autowrap_mode = 3
+
+[node name="Stats" type="ColorRect" parent="."]
+offset_left = 152.0
+offset_top = 96.0
+offset_right = 248.0
+offset_bottom = 136.0
+color = Color(0.854902, 0.792157, 0.580392, 0.47451)
+
+[node name="LinesCrossed" type="Label" parent="Stats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 52.0
+offset_bottom = 30.3333
+theme_override_font_sizes/font_size = 8
+text = "Line Cross: "
+
+[node name="TotalDrops" type="Label" parent="Stats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 98.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 8
+text = "Total Drops:
+"
+
+[node name="BuffonNeedle" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(192, 8)
+scale = Vector2(0.325472, 0.316346)
+texture = ExtResource("15_40bh3")
+
+[node name="MenuButton" parent="." instance=ExtResource("16_mi65a")]
+process_priority = 5
+modulate = Color(1, 1, 1, 0.572549)
+position = Vector2(-280, 88)
+
+[connection signal="pressed" from="DropNeedle" to="." method="_on_drop_needle_pressed"]
+[connection signal="pressed" from="Drop100" to="." method="_on_drop_100_pressed"]

@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://d0qjf4myyuk5m" path="res://Assets/Images/MenuButton.png" id="2_xvrwr"]
 
 [node name="MenuButton" type="Node2D"]
+process_priority = 5
+process_physics_priority = 5
 script = ExtResource("1_n7om3")
 
 [node name="Return" type="TextureButton" parent="."]

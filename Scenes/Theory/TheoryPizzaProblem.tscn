@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b7iw1bhsa7aat"]
+[gd_scene load_steps=25 format=3 uid="uid://b7iw1bhsa7aat"]
 
 [ext_resource type="Script" path="res://Scripts/LevelHandlers/TheoryPizzaHandler.gd" id="1_j2qpm"]
 [ext_resource type="Texture2D" uid="uid://pi37nojxh0sk" path="res://Assets/Images/pizza.png" id="1_srqby"]
@@ -60,11 +60,22 @@ location = Vector2(-232, -16)
 duration = 0.8
 mood = "Speaking"
 
-[node name="TheoryPizzaProblem" type="Node2D" node_paths=PackedStringArray("audio", "obj", "objective", "game_ui", "mascot", "camera", "dialogue")]
+[sub_resource type="Resource" id="Resource_jhna3"]
+resource_name = "DefaultName"
+script = ExtResource("13_jepye")
+level = 1
+id = 0
+dialogue = "Remember that the pieces don't have to be equal!"
+location = Vector2(-160, -24)
+duration = 0.5
+mood = "Thinking"
+
+[node name="TheoryPizzaProblem" type="Node2D" node_paths=PackedStringArray("audio", "obj", "pizza", "objective", "game_ui", "mascot", "camera", "dialogue")]
 script = ExtResource("1_j2qpm")
 audio = NodePath("AudioStreamPlayer2D")
 obj = NodePath("Objective")
 levels = Array[Resource("res://Scenes/Theory/TheoryResource.gd")]([ExtResource("2_2w7md"), ExtResource("3_nd8n2"), ExtResource("4_g84h5")])
+pizza = NodePath("PizzaObject")
 objective = NodePath("ObjectiveComponent")
 game_ui = NodePath("GameUI")
 mascot = NodePath("MascotComponent")
@@ -112,7 +123,7 @@ position = Vector2(9.09495e-13, -8)
 
 [node name="Dialogue" type="Node2D" parent="."]
 script = ExtResource("7_cs6hc")
-custom_res = Array[Resource]([SubResource("Resource_bmkpv"), SubResource("Resource_8urau"), SubResource("Resource_xa53y"), SubResource("Resource_af47l")])
+custom_res = Array[Resource]([SubResource("Resource_bmkpv"), SubResource("Resource_8urau"), SubResource("Resource_xa53y"), SubResource("Resource_af47l"), SubResource("Resource_jhna3")])
 
 [node name="Objective" type="Label" parent="."]
 texture_filter = 3

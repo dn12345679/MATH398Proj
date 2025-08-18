@@ -98,13 +98,6 @@ position = Vector2(184, -24)
 visible = false
 scale = Vector2(0.5, 0.5)
 
-[node name="ObjectiveComponent" parent="." instance=ExtResource("4_mhuwf")]
-z_index = 99
-position = Vector2(8, -40)
-
-[node name="GameUI" parent="." instance=ExtResource("5_enakr")]
-metadata/_edit_lock_ = true
-
 [node name="Quincunx2D" parent="." instance=ExtResource("7_tcwbj")]
 
 [node name="SpawnBallNode" type="Control" parent="."]
@@ -166,6 +159,13 @@ offset_bottom = 136.0
 theme_override_font_sizes/font_size = 10
 text = "Example Text"
 autowrap_mode = 3
+
+[node name="GameUI" parent="." instance=ExtResource("5_enakr")]
+metadata/_edit_lock_ = true
+
+[node name="ObjectiveComponent" parent="." instance=ExtResource("4_mhuwf")]
+z_index = 99
+position = Vector2(8, -40)
 
 [node name="MenuButton" parent="." instance=ExtResource("19_spahh")]
 position = Vector2(221, 96)

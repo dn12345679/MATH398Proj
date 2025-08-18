@@ -18,6 +18,9 @@ func _ready():
 
 
 func initialize_box(len: float) -> void:
+	for child in get_children():
+		child.queue_free()  # reset
+		
 	var dir: Array[Vector2] = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
 	var texture: Texture2D = load("res://Assets/Images/quincunx_bar.png")
 	for i in range(4):

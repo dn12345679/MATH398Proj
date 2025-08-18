@@ -15,6 +15,7 @@ func _input(event):
 		await anim.animation_finished
 		get_tree().paused = false
 		visible = false
+		
 
 func _ready():
 	intro()

@@ -9,6 +9,7 @@ extends Resource
 @export var hints: Array[String]
 @export var correct_answer: Array[String]
 
+## NOTE: For future reference, this game DID NOT make it to the final cut. Ignore this
 @export_category("Card Game")
 var rand: Vector2i = Vector2i(-1, -1) # to fill with randoms
 @export var card_draw: Array[Vector2i] # FOR FUTURE REFERENCE: 
@@ -28,3 +29,8 @@ var rand: Vector2i = Vector2i(-1, -1) # to fill with randoms
 @export var distance_from_center: float = 32.0 
 @export var colors: Array[Color] = []
 @export var can_simulate: bool = false
+
+@export_category("Buffon's Needle")
+@export var needle_length: float = 31
+@export var line_distance: float = 40
+@export var can_drop_100: bool = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bbt3x8ytel0qp"]
+[gd_scene load_steps=23 format=3 uid="uid://bbt3x8ytel0qp"]
 
 [ext_resource type="Texture2D" uid="uid://bx3cin15ooqu3" path="res://Assets/Images/lightbulbs.png" id="1_1jbtp"]
 [ext_resource type="Script" path="res://Scripts/UIComponent.gd" id="1_spjtn"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://djf665cqk8kww" path="res://Components/UIComponents/SettingsComponent.tscn" id="4_ib55k"]
 [ext_resource type="Texture2D" uid="uid://7bmo4jqw2u23" path="res://Assets/Images/Restart.png" id="5_gldbw"]
 [ext_resource type="PackedScene" uid="uid://ti3252exa7r8" path="res://Components/AnswerComponent.tscn" id="9_2bru1"]
+[ext_resource type="PackedScene" uid="uid://c0bb0sd6xru48" path="res://Components/ExplanationComponent.tscn" id="10_l5ap2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d6spe"]
 atlas = ExtResource("1_1jbtp")
@@ -154,7 +155,7 @@ _data = {
 "RESET": SubResource("Animation_iy6ku")
 }
 
-[node name="GameUI" type="Control" node_paths=PackedStringArray("hint_btn", "settings_btn", "answer_btn", "stats_btn", "restart_btn", "hint_bulbs", "answer", "time_label", "timer", "audio", "anim", "settings_menu")]
+[node name="GameUI" type="Control" node_paths=PackedStringArray("hint_btn", "settings_btn", "answer_btn", "stats_btn", "restart_btn", "hint_bulbs", "answer", "explanation", "time_label", "timer", "audio", "anim", "settings_menu")]
 layout_mode = 3
 anchors_preset = 0
 scale = Vector2(0.5, 0.5)
@@ -166,6 +167,7 @@ stats_btn = NodePath("BottomUI/Stats")
 restart_btn = NodePath("BottomUI/Restart")
 hint_bulbs = NodePath("TopUI/Bulbs")
 answer = NodePath("AnswerComponent")
+explanation = NodePath("AnswerComponent/Explanation")
 time_label = NodePath("TopUI/TimeLabel")
 timer = NodePath("TopUI/TimeLabel/Timer")
 audio = NodePath("UISFX")
@@ -221,6 +223,7 @@ scale = Vector2(3, 3)
 texture_normal = SubResource("AtlasTexture_ih7ss")
 
 [node name="Stats" type="TextureButton" parent="BottomUI"]
+visible = false
 texture_filter = 3
 layout_mode = 0
 offset_left = 80.0
@@ -304,6 +307,11 @@ offset_left = -576.0
 offset_top = -320.0
 offset_right = -576.0
 offset_bottom = -320.0
+
+[node name="Explanation" parent="AnswerComponent" instance=ExtResource("10_l5ap2")]
+visible = false
+z_index = 999
+layout_mode = 1
 
 [connection signal="pressed" from="BottomUI/Hint" to="." method="_on_hint_pressed"]
 [connection signal="pressed" from="BottomUI/Settings" to="." method="_on_settings_pressed"]

@@ -7,7 +7,7 @@ script = ExtResource("1_65qya")
 title = ""
 description = "Now in this scenario, we have 16 people all sitting in a circle.  Whoever holds the weapon proceeds to eliminate the person to their right (clockwise). The weapon is passed around until the last person remains. "
 objective_type = "Move the weapon around and press \"Run Simulation\". Say the person holding it is person 1.What is unique about the person who survives? Which person survives? (Press the Restart button if you want to reset)"
-completion_message = "According to the Josephus Permutation, the person at index 0 (or Person 1) survives"
+completion_message = "According to the Josephus Permutation, the person at index 0 (or Person 1) survives if the number of individuals is a power of 2."
 reward_time = 0
 hints = Array[String](["Hint 1: In this variant of the permutation, every other person is killed, meaning k = 2", "Hint 2: The formula for the Josephus Problem is J(n, k) = (J(n-1,k) + k) % n. Fill in the missing information"])
 correct_answer = Array[String](["1", "0"])
@@ -23,3 +23,6 @@ number_contestants = 16
 distance_from_center = 32.0
 colors = Array[Color]([])
 can_simulate = true
+needle_length = 31.0
+line_distance = 40.0
+can_drop_100 = false

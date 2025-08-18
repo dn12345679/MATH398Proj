@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="StatResource" load_steps=2 format=3 uid="uid://r4dpqw7vh1lg"]
+
+[ext_resource type="Script" path="res://Scenes/Statistics/StatResource.gd" id="1_ixrap"]
+
+[resource]
+script = ExtResource("1_ixrap")
+title = ""
+description = "In the final activity, you will cover a very in interesting finding regarding the Buffons Needle. For this experiment, the length L of a stick was 31, and the spacing X was 40. Find P (proportion of needles on the line), and answer the question."
+objective_type = " Run 2000 tests; what number does this appear to approximate? Use the equation below as a reference."
+completion_message = "As the sample size tends to infinity, you will notice that the formula very closely approximates pi"
+reward_time = 0
+hints = Array[String](["Hint 1: The formula can be plugged in to get  ?? = (2 * 31)/(40 * prop_on/total). Use this and guess that number its approaching", "Hint 2: The number is somewhere above 3.1 and below 3.2. What mathematical constant matches this? The answer can be the name, approximation (up to 5 digits),"])
+correct_answer = Array[String](["3.14", "3.141", "3.1415", "3.14159", "pi", "PI", "Pi"])
+card_draw = Array[Vector2i]([])
+card_count = 0
+replacement = false
+allow_delete_pegs = false
+max_peg_delete = null
+distribution = Array[int]([-1, 1])
+initial_distance = 0.0
+number_chairs = 16
+number_contestants = 4
+distance_from_center = 32.0
+colors = Array[Color]([])
+can_simulate = false
+needle_length = 31.0
+line_distance = 40.0
+can_drop_100 = true

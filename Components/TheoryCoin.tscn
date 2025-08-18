@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3mis1q8wvht3"]
+[gd_scene load_steps=14 format=3 uid="uid://d3mis1q8wvht3"]
 
 [ext_resource type="Script" path="res://Scripts/TheoryCoin.gd" id="1_ycuej"]
 [ext_resource type="Texture2D" uid="uid://b4eybogpu7asw" path="res://Assets/Images/Coin.png" id="2_f4ite"]
+[ext_resource type="AudioStream" uid="uid://x8fx00ws52vn" path="res://Assets/Audio/coin_drop.mp3" id="3_ef4fj"]
+[ext_resource type="AudioStream" uid="uid://4dxck42okcl" path="res://Assets/Audio/retro-coin-4-236671.mp3" id="3_tx8a5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ors2"]
 atlas = ExtResource("2_f4ite")
@@ -66,12 +68,77 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="TheoryCoin" type="Control" node_paths=PackedStringArray("anim", "label")]
+[sub_resource type="Animation" id="Animation_20lwb"]
+resource_name = "Clicked"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, 8), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-8, -8), Vector2(-8, -16), Vector2(-8, 0), Vector2(-8, -8)]
+}
+
+[sub_resource type="Animation" id="Animation_gshv3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, -16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_27e7v"]
+_data = {
+"Clicked": SubResource("Animation_20lwb"),
+"RESET": SubResource("Animation_gshv3")
+}
+
+[node name="TheoryCoin" type="Control" node_paths=PackedStringArray("anim", "animator_effect", "label", "audio")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_ycuej")
 anim = NodePath("Animation")
+animator_effect = NodePath("AnimationPlayer")
 label = NodePath("Label")
+audio = NodePath("AudioStreamPlayer2D")
+coin_up = ExtResource("3_ef4fj")
+coin_down = ExtResource("3_tx8a5")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 texture_filter = 3
@@ -81,10 +148,10 @@ animation = &"CoinSpin"
 [node name="Label" type="Label" parent="."]
 texture_filter = 3
 layout_mode = 0
-offset_left = -7.0
-offset_top = -11.0
-offset_right = 9.0
-offset_bottom = 12.0
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 8.0
+offset_bottom = 7.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 
@@ -94,3 +161,14 @@ offset_left = -32.0
 offset_top = -32.0
 offset_right = 32.0
 offset_bottom = 32.0
+metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ef4fj")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_27e7v")
+}

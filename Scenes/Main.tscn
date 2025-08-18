@@ -1,31 +1,19 @@
-[gd_scene load_steps=12 format=3 uid="uid://c741iva62ihqg"]
+[gd_scene load_steps=6 format=3 uid="uid://c741iva62ihqg"]
 
 [ext_resource type="Script" path="res://Scripts/MenuScreen.gd" id="1_3m4q6"]
 [ext_resource type="PackedScene" uid="uid://bgdhlcn253ppt" path="res://Components/ParallaxComponent.tscn" id="1_4x4k2"]
 [ext_resource type="Texture2D" uid="uid://clceqx03ui6pl" path="res://Assets/Images/tutorial.png" id="3_53v3f"]
-[ext_resource type="Texture2D" uid="uid://doxlt0i0ygaih" path="res://Assets/Images/geometry.png" id="4_tecwn"]
-[ext_resource type="Texture2D" uid="uid://dgry7l5q7pgpr" path="res://Assets/Images/statistics.png" id="5_5qv2t"]
-[ext_resource type="Texture2D" uid="uid://bvdq8rrylq0ll" path="res://Assets/Images/card_icon.png" id="6_lvg6k"]
-[ext_resource type="Texture2D" uid="uid://bf12s64obf3io" path="res://Assets/Images/quincunx_icon.png" id="7_oq76l"]
-[ext_resource type="Texture2D" uid="uid://dw5xmwkkfe4bt" path="res://Assets/Images/dagger_icon.png.png" id="8_sjngp"]
+[ext_resource type="AudioStream" uid="uid://bhbqe75slah7w" path="res://Assets/Audio/For_Your_Convenience.mp3" id="4_5gly1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q27cg"]
 atlas = ExtResource("3_53v3f")
 region = Rect2(0, 0, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ygo47"]
-atlas = ExtResource("4_tecwn")
-region = Rect2(0, 0, 48, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qlfl6"]
-atlas = ExtResource("5_5qv2t")
-region = Rect2(0, 0, 48, 32)
-
-[node name="Main" type="Control" node_paths=PackedStringArray("level_nodes")]
+[node name="Main" type="Control" node_paths=PackedStringArray("audio")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3m4q6")
-level_nodes = NodePath("StatisticsLevels")
+audio = NodePath("AudioStreamPlayer2D")
 
 [node name="ParallaxComponent" parent="." instance=ExtResource("1_4x4k2")]
 scale_bg = 2.0
@@ -42,65 +30,75 @@ offset_bottom = 200.0
 scale = Vector2(3, 3)
 texture_normal = SubResource("AtlasTexture_q27cg")
 
-[node name="Geometry" type="TextureButton" parent="."]
-visible = false
-texture_filter = 3
-layout_mode = 0
-offset_left = 24.0
-offset_top = 536.0
-offset_right = 72.0
-offset_bottom = 576.0
-scale = Vector2(3, 3)
-texture_normal = SubResource("AtlasTexture_ygo47")
-
-[node name="Statistics" type="TextureButton" parent="."]
-texture_filter = 3
-layout_mode = 0
-offset_left = 504.0
-offset_top = 312.0
-offset_right = 552.0
-offset_bottom = 352.0
-scale = Vector2(3, 3)
-texture_normal = SubResource("AtlasTexture_qlfl6")
-
-[node name="StatisticsLevels" type="Control" parent="."]
-visible = false
+[node name="Stats" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="CardGame" type="TextureButton" parent="StatisticsLevels"]
-texture_filter = 3
+[node name="Quincunx" type="Button" parent="Stats"]
 layout_mode = 0
-offset_left = 368.0
-offset_top = 392.0
-offset_right = 408.0
-offset_bottom = 432.0
-scale = Vector2(3, 3)
-texture_normal = ExtResource("6_lvg6k")
+offset_left = 384.0
+offset_top = 320.0
+offset_right = 467.0
+offset_bottom = 351.0
+text = "Quincunx
+"
 
-[node name="QuincunxGame" type="TextureButton" parent="StatisticsLevels"]
-texture_filter = 3
+[node name="BuffonsNeedle" type="Button" parent="Stats"]
 layout_mode = 0
-offset_left = 512.0
-offset_top = 392.0
-offset_right = 552.0
-offset_bottom = 432.0
-scale = Vector2(3, 3)
-texture_normal = ExtResource("7_oq76l")
+offset_left = 384.0
+offset_top = 368.0
+offset_right = 515.0
+offset_bottom = 399.0
+text = "Buffon's Needle
+"
 
-[node name="DaggerGame" type="TextureButton" parent="StatisticsLevels"]
-texture_filter = 3
+[node name="JosephusPermutation" type="Button" parent="Stats"]
 layout_mode = 0
-offset_left = 656.0
-offset_top = 392.0
-offset_right = 696.0
-offset_bottom = 432.0
-scale = Vector2(3, 3)
-texture_normal = ExtResource("8_sjngp")
+offset_left = 384.0
+offset_top = 416.0
+offset_right = 517.0
+offset_bottom = 447.0
+text = "Josephus Permutation"
+
+[node name="Theory" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FrobeniusCoin" type="Button" parent="Theory"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 320.0
+offset_right = 764.0
+offset_bottom = 351.0
+text = "Frobenius Coin"
+
+[node name="LazyCaterersProblem" type="Button" parent="Theory"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 368.0
+offset_right = 826.0
+offset_bottom = 399.0
+text = "Lazy Caterer's Problem"
+
+[node name="SquarePacking" type="Button" parent="Theory"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 416.0
+offset_right = 767.0
+offset_bottom = 447.0
+text = "Square Packing"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_5gly1")
+volume_db = -20.0
+bus = &"Music"
 
 [connection signal="pressed" from="Tutorial" to="." method="_on_tutorial_pressed"]
-[connection signal="pressed" from="Statistics" to="." method="_on_statistics_pressed"]
-[connection signal="pressed" from="StatisticsLevels/CardGame" to="." method="_on_card_game_pressed"]
-[connection signal="pressed" from="StatisticsLevels/QuincunxGame" to="." method="_on_quincunx_game_pressed"]
-[connection signal="pressed" from="StatisticsLevels/DaggerGame" to="." method="_on_dagger_game_pressed"]
+[connection signal="pressed" from="Stats/Quincunx" to="." method="_on_quincunx_pressed"]
+[connection signal="pressed" from="Stats/BuffonsNeedle" to="." method="_on_buffons_needle_pressed"]
+[connection signal="pressed" from="Stats/JosephusPermutation" to="." method="_on_josephus_permutation_pressed"]
+[connection signal="pressed" from="Theory/FrobeniusCoin" to="." method="_on_frobenius_coin_pressed"]
+[connection signal="pressed" from="Theory/LazyCaterersProblem" to="." method="_on_lazy_caterers_problem_pressed"]
+[connection signal="pressed" from="Theory/SquarePacking" to="." method="_on_square_packing_pressed"]
